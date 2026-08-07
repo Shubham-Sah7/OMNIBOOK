@@ -1,19 +1,44 @@
-import { Button } from "@/components/ui/button"
+import { TopBanner } from "@/components/marketing/top-banner"
+import { Header } from "@/components/marketing/header"
+import { Hero } from "@/components/marketing/hero"
+import { Stats } from "@/components/marketing/stats"
+import { BuiltForMarkets } from "@/components/marketing/built-for-markets"
+import { TrendingMarkets } from "@/components/marketing/trending-markets"
+import { HowItWorks } from "@/components/marketing/how-it-works"
+import { WhyOmnibook } from "@/components/marketing/why-omnibook"
+import { CategoriesGrid } from "@/components/marketing/categories-grid"
+import { Leaderboard } from "@/components/marketing/leaderboard"
+import { TransparencySection } from "@/components/marketing/transparency"
+import { TestimonialsStory } from "@/components/marketing/testimonials-story"
+import { CallToAction } from "@/components/marketing/cta"
+import { Footer } from "@/components/marketing/footer"
+import { SmoothScrollProvider } from "@/components/marketing/smooth-scroll"
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
+    <SmoothScrollProvider>
+      <div className="relative min-h-screen bg-[#0a0a0a] bg-grid-full text-white selection:bg-[#00D8F6] selection:text-black">
+        <TopBanner />
+        <div className="mx-auto max-w-[90rem]">
+          <Header />
+
+          <main>
+            <Hero />
+            <Stats />
+            <BuiltForMarkets />
+            <TrendingMarkets />
+            <HowItWorks />
+            <WhyOmnibook />
+            <CategoriesGrid />
+            <Leaderboard />
+            <TransparencySection />
+            <TestimonialsStory />
+            <CallToAction />
+          </main>
+
+          <Footer />
         </div>
       </div>
-    </div>
+    </SmoothScrollProvider>
   )
 }
