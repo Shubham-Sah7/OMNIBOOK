@@ -1,6 +1,5 @@
 "use client"
 
-import { TopBanner } from "@/components/marketing/top-banner"
 import { Header } from "@/components/marketing/header"
 import { Hero } from "@/components/marketing/hero"
 import { Stats } from "@/components/marketing/stats"
@@ -22,7 +21,6 @@ export default function Page() {
     <SmoothScrollProvider>
       <BgModeProvider>
         <div className="relative min-h-screen bg-[#fbfbfd] dark:bg-[#0a0a0a] bg-grid-full text-slate-900 dark:text-white selection:bg-[#00D8F6] selection:text-black transition-colors duration-300">
-          <TopBanner />
           <div className="mx-auto max-w-[90rem]">
             <Header />
 
