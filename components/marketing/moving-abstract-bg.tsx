@@ -3,12 +3,16 @@
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { useBgMode } from "./bg-mode-context"
+import { ProbabilityWaveCanvas } from "./probability-wave-canvas"
 
 export function MovingAbstractBackground() {
   const { bgMode } = useBgMode()
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden select-none z-0">
+      {/* Live Market Sentiment GPU Probability Wave Canvas */}
+      <ProbabilityWaveCanvas />
+
       <AnimatePresence mode="wait">
         {bgMode === "trading" ? (
           <motion.div
@@ -38,7 +42,7 @@ export function MovingAbstractBackground() {
                 alt="Abstract Financial Trading Visual"
                 fill
                 priority
-                className="object-cover object-center opacity-90 dark:opacity-95"
+                className="object-cover object-center opacity-85 dark:opacity-90"
               />
             </motion.div>
 
