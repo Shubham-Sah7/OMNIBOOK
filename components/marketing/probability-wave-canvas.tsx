@@ -43,7 +43,7 @@ export function ProbabilityWaveCanvas() {
     let offset = 0
     let time = 0
 
-    // Render 60 FPS Event-Splitting Financial Terminal Canvas
+    // Render 60 FPS Pixel-Perfect Financial Prediction Canvas
     const render = () => {
       time += 0.012
       offset += 1.2
@@ -51,34 +51,41 @@ export function ProbabilityWaveCanvas() {
 
       const centerY = height * 0.5
 
-      // 1. Draw Horizontal Baseline with Small Tick Marks
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.14)"
+      // 1. Draw Top Horizontal Grid Line & Center Baseline with Ticks
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.12)"
       ctx.lineWidth = 1
       ctx.setLineDash([])
 
+      // Top Horizontal Line
+      ctx.beginPath()
+      ctx.moveTo(0, height * 0.16)
+      ctx.lineTo(width, height * 0.16)
+      ctx.stroke()
+
+      // Center Baseline
       ctx.beginPath()
       ctx.moveTo(0, centerY)
       ctx.lineTo(width, centerY)
       ctx.stroke()
 
-      // Small vertical tick marks on baseline
-      const tickSpacing = 200
+      // Small Vertical Tick Marks along baseline
+      const tickSpacing = 220
       const tickOffset = offset % tickSpacing
       for (let x = width - tickOffset; x > 0; x -= tickSpacing) {
         ctx.beginPath()
-        ctx.moveTo(x, centerY - 4)
-        ctx.lineTo(x, centerY + 4)
+        ctx.moveTo(x, centerY - 5)
+        ctx.lineTo(x, centerY + 5)
         ctx.stroke()
       }
 
       // 2. Draw Vertical Dashed Market Event Markers & Labels
-      const eventSpacing = 340
+      const eventSpacing = 360
       const eventOffset = offset % eventSpacing
       const eventLabels = [
+        "new market",
         "event occurred",
         "new market",
-        "event did not occur",
-        "new market",
+        "event occurred",
       ]
 
       ctx.strokeStyle = "rgba(255, 255, 255, 0.18)"
@@ -86,21 +93,33 @@ export function ProbabilityWaveCanvas() {
       ctx.setLineDash([4, 4])
 
       let eventIdx = 0
-      const currentEvents: number[] = []
+      const eventXCoords: number[] = []
 
       for (let x = width - eventOffset; x > -200; x -= eventSpacing) {
-        currentEvents.push(x)
+        eventXCoords.push(x)
 
         ctx.beginPath()
-        ctx.moveTo(x, height * 0.12)
-        ctx.lineTo(x, height * 0.88)
+        ctx.moveTo(x, height * 0.15)
+        ctx.lineTo(x, height * 0.85)
         ctx.stroke()
 
-        // Bottom Event Text Label (matching reference image font style)
+        // Draw solid accent line next to the second event marker (matching reference image)
+        if (eventIdx % 2 === 0) {
+          ctx.setLineDash([])
+          ctx.strokeStyle = "rgba(255, 255, 255, 0.22)"
+          ctx.beginPath()
+          ctx.moveTo(x + 18, height * 0.15)
+          ctx.lineTo(x + 18, height * 0.85)
+          ctx.stroke()
+          ctx.strokeStyle = "rgba(255, 255, 255, 0.18)"
+          ctx.setLineDash([4, 4])
+        }
+
+        // Bottom Monospace Label
         const label = eventLabels[eventIdx % eventLabels.length]
         ctx.fillStyle = "rgba(255, 255, 255, 0.45)"
         ctx.font = "11px Inter, monospace, sans-serif"
-        ctx.fillText(label, x + 6, height * 0.86)
+        ctx.fillText(label, x + 6, height * 0.84)
         eventIdx++
       }
 
@@ -117,79 +136,111 @@ export function ProbabilityWaveCanvas() {
         ctx.fill()
       }
 
-      // 3. Mathematical Event-Splitting Financial Spline Curves
-      // Generates unified trend line that splits into Green (YES), White (Base), and Red (NO) branches
-      const step = 3
+      // 3. Pixel-Perfect Financial Line Curve Generator
+      const step = 2
 
-      // Function to calculate base trend height at screen coordinate x
-      const getBaseY = (x: number) => {
+      // Function to calculate primary white benchmark trend height at screen coordinate x
+      const getPrimaryY = (x: number) => {
         const worldX = x + offset
-        const macro = Math.sin(worldX * 0.003 + time * 0.8) * 80 + Math.cos(worldX * 0.008 + time * 0.5) * 35
-        const micro = Math.sin(worldX * 0.03 + time * 2) * 5 + Math.cos(worldX * 0.07) * 3
+        const macro =
+          Math.sin(worldX * 0.003 + time * 0.6) * 70 +
+          Math.cos(worldX * 0.007 + time * 0.4) * 40
+        const micro =
+          Math.sin(worldX * 0.04 + time * 2) * 4 +
+          Math.cos(worldX * 0.1) * 2.5
         return centerY + macro + micro
       }
 
-      // Function to calculate branch displacement multiplier at screen coordinate x
-      const getBranchOffset = (x: number) => {
-        // Find nearest event line to x
-        const relativeX = (x + offset) % eventSpacing
-        const phase = relativeX / eventSpacing // 0.0 to 1.0 within event cycle
+      // Latest Event Marker X (where green/red split occurs near right side)
+      const splitX = width - eventOffset
 
-        // If phase < 0.3 (right after new market), lines are merged together (multiplier near 0)
-        // If phase >= 0.3, lines diverge into Green (+), White (0), and Red (-) branches
-        if (phase < 0.35) {
-          return Math.sin((phase / 0.35) * (Math.PI / 2)) * 0.2
-        } else {
-          return 0.2 + Math.sin(((phase - 0.35) / 0.65) * (Math.PI / 2)) * 0.8
-        }
-      }
+      let greenEnd = { x: width, y: 0 }
+      let whiteEnd = { x: width, y: 0 }
+      let redEnd = { x: width, y: 0 }
 
-      let lastGreenY = 0
-      let lastWhiteY = 0
-      let lastRedY = 0
-
-      // A. Draw White Central Benchmark Line
+      // A. Main White Trend Line (draws unified path up to split point, then branches)
       ctx.beginPath()
       ctx.strokeStyle = "#EBEEF2"
-      ctx.lineWidth = 2.0
+      ctx.lineWidth = 1.8
+
       for (let x = 0; x <= width; x += step) {
-        const baseY = getBaseY(x)
-        if (x === 0) ctx.moveTo(x, baseY)
-        else ctx.lineTo(x, baseY)
-        if (x >= width - step) lastWhiteY = baseY
+        const baseY = getPrimaryY(x)
+        let y = baseY
+
+        // If x is past split point near right side, white line branches slightly center-down
+        if (x > splitX) {
+          const progress = (x - splitX) / Math.max(width - splitX, 1)
+          y = baseY + progress * 25 + Math.sin(progress * Math.PI) * 10
+        }
+
+        if (x === 0) ctx.moveTo(x, y)
+        else ctx.lineTo(x, y)
+
+        if (x >= width - step) whiteEnd = { x, y }
       }
       ctx.stroke()
 
-      // B. Draw Green (YES / Bullish) Branch Line
+      // B. Secondary Green Branch Line (Splits upwards at latest new market point)
       ctx.beginPath()
       ctx.strokeStyle = "#10B981"
-      ctx.lineWidth = 2.2
+      ctx.lineWidth = 2.0
       ctx.shadowBlur = 8
-      ctx.shadowColor = "rgba(16, 185, 129, 0.6)"
+      ctx.shadowColor = "rgba(16, 185, 129, 0.5)"
+
+      let greenStarted = false
       for (let x = 0; x <= width; x += step) {
-        const baseY = getBaseY(x)
-        const branchMult = getBranchOffset(x)
-        const greenY = baseY - branchMult * 55 - Math.sin((x + offset) * 0.015) * 8
-        if (x === 0) ctx.moveTo(x, greenY)
-        else ctx.lineTo(x, greenY)
-        if (x >= width - step) lastGreenY = greenY
+        const baseY = getPrimaryY(x)
+
+        // Earlier green divergence sub-branch (left side)
+        const firstSplit = splitX - eventSpacing
+        if (x > firstSplit && x < firstSplit + 140) {
+          const progress = (x - firstSplit) / 140
+          const greenY = baseY - Math.sin(progress * Math.PI) * 35
+          if (!greenStarted) {
+            ctx.moveTo(x, baseY)
+            greenStarted = true
+          } else {
+            ctx.lineTo(x, greenY)
+          }
+        }
+        // Main Right Green Branch
+        else if (x >= splitX) {
+          const progress = (x - splitX) / Math.max(width - splitX, 1)
+          const greenY = baseY - progress * 45 - Math.sin(progress * Math.PI * 1.5) * 15
+          if (!greenStarted) {
+            ctx.moveTo(x, baseY)
+            greenStarted = true
+          } else {
+            ctx.lineTo(x, greenY)
+          }
+          if (x >= width - step) greenEnd = { x, y: greenY }
+        } else {
+          greenStarted = false
+        }
       }
       ctx.stroke()
       ctx.shadowBlur = 0
 
-      // C. Draw Red (NO / Bearish) Branch Line
+      // C. Red Branch Line (Splits downwards at latest new market point)
       ctx.beginPath()
       ctx.strokeStyle = "#EF4444"
       ctx.lineWidth = 2.0
       ctx.shadowBlur = 8
-      ctx.shadowColor = "rgba(239, 68, 68, 0.6)"
-      for (let x = 0; x <= width; x += step) {
-        const baseY = getBaseY(x)
-        const branchMult = getBranchOffset(x)
-        const redY = baseY + branchMult * 60 + Math.cos((x + offset) * 0.015) * 8
-        if (x === 0) ctx.moveTo(x, redY)
-        else ctx.lineTo(x, redY)
-        if (x >= width - step) lastRedY = redY
+      ctx.shadowColor = "rgba(239, 68, 68, 0.5)"
+
+      let redStarted = false
+      for (let x = splitX; x <= width; x += step) {
+        const baseY = getPrimaryY(x)
+        const progress = (x - splitX) / Math.max(width - splitX, 1)
+        const redY = baseY + progress * 65 + Math.sin(progress * Math.PI * 1.2) * 12
+
+        if (!redStarted) {
+          ctx.moveTo(x, baseY)
+          redStarted = true
+        } else {
+          ctx.lineTo(x, redY)
+        }
+        if (x >= width - step) redEnd = { x, y: redY }
       }
       ctx.stroke()
       ctx.shadowBlur = 0
@@ -197,7 +248,7 @@ export function ProbabilityWaveCanvas() {
       // 4. Draw Right-Edge Pulsing Tip Dots (matching reference image)
       // Green Tip Dot
       ctx.beginPath()
-      ctx.arc(width - 4, lastGreenY, 4, 0, Math.PI * 2)
+      ctx.arc(greenEnd.x - 2, greenEnd.y, 4, 0, Math.PI * 2)
       ctx.fillStyle = "#10B981"
       ctx.shadowBlur = 10
       ctx.shadowColor = "#10B981"
@@ -205,7 +256,7 @@ export function ProbabilityWaveCanvas() {
 
       // White Tip Dot
       ctx.beginPath()
-      ctx.arc(width - 4, lastWhiteY, 4, 0, Math.PI * 2)
+      ctx.arc(whiteEnd.x - 2, whiteEnd.y, 4, 0, Math.PI * 2)
       ctx.fillStyle = "#EBEEF2"
       ctx.shadowBlur = 8
       ctx.shadowColor = "#EBEEF2"
@@ -213,7 +264,7 @@ export function ProbabilityWaveCanvas() {
 
       // Red Tip Dot
       ctx.beginPath()
-      ctx.arc(width - 4, lastRedY, 4, 0, Math.PI * 2)
+      ctx.arc(redEnd.x - 2, redEnd.y, 4, 0, Math.PI * 2)
       ctx.fillStyle = "#EF4444"
       ctx.shadowBlur = 10
       ctx.shadowColor = "#EF4444"
