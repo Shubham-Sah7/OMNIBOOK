@@ -33,7 +33,7 @@ export function TestimonialsStory() {
           <div className="linear-badge mb-3">
             COMMUNITY
           </div>
-          <h2 className="mx-auto max-w-3xl text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
+          <h2 className="mx-auto max-w-3xl text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl md:text-5xl">
             Trusted by prediction traders
           </h2>
         </div>
@@ -42,17 +42,17 @@ export function TestimonialsStory() {
           {TESTIMONIALS.map((t) => (
             <div
               key={t.author}
-              className="group relative flex flex-col justify-between rounded-xl border border-white/[0.06] bg-[#111111] p-7 transition-all duration-200 hover:border-white/[0.14]"
+              className="group relative flex flex-col justify-between rounded-xl border border-black/[0.08] dark:border-white/[0.06] bg-white dark:bg-[#111111] p-7 shadow-sm dark:shadow-none transition-all duration-200 hover:border-black/[0.16] dark:hover:border-white/[0.14]"
             >
               <div>
-                <Quote className="mb-4 h-6 w-6 stroke-[1.5] text-[#00D8F6] opacity-60" />
-                <p className="text-sm leading-relaxed text-gray-3">
+                <Quote className="mb-4 h-6 w-6 stroke-[1.5] text-[#00D8F6] opacity-80" />
+                <p className="text-sm leading-relaxed text-slate-600 dark:text-gray-3">
                   &ldquo;{t.quote}&rdquo;
                 </p>
               </div>
 
-              <div className="mt-6 border-t border-white/[0.06] pt-4 flex items-center gap-3">
-                <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-white/10 bg-gray-9">
+              <div className="mt-6 border-t border-black/[0.06] dark:border-white/[0.06] pt-4 flex items-center gap-3">
+                <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-black/10 dark:border-white/10 bg-slate-200 dark:bg-gray-9">
                   <Image
                     src={t.avatar}
                     alt={t.author}
@@ -62,9 +62,9 @@ export function TestimonialsStory() {
                   />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-white">{t.author}</h3>
-                  <p className="text-[11px] text-gray-4">{t.role}</p>
-                  <span className="font-mono text-[9px] text-gray-4 uppercase">
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">{t.author}</h3>
+                  <p className="text-[11px] text-slate-500 dark:text-gray-4">{t.role}</p>
+                  <span className="font-mono text-[9px] font-semibold text-slate-500 dark:text-gray-4 uppercase">
                     TRADES: {t.market}
                   </span>
                 </div>

@@ -35,7 +35,7 @@ export function HowItWorks() {
           <div className="mx-auto max-w-3xl">
             <MaskTextReveal
               text="Three steps. One prediction."
-              className="justify-center text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl"
+              className="justify-center text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl md:text-5xl"
             />
           </div>
         </AnimatedSection>
@@ -45,17 +45,17 @@ export function HowItWorks() {
             <AnimatedSection key={s.step} delay={idx * 0.12}>
               <BentoCard className="p-7 text-left">
                 <div className="mb-5 flex items-center justify-between">
-                  <span className="font-mono text-3xl font-bold text-white">
+                  <span className="font-mono text-3xl font-bold text-slate-900 dark:text-white">
                     {s.step}
                   </span>
-                  <span className="rounded border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 font-mono text-[10px] font-medium text-gray-4">
+                  <span className="rounded border border-black/[0.08] dark:border-white/[0.08] bg-slate-100 dark:bg-white/[0.03] px-2 py-0.5 font-mono text-[10px] font-medium text-slate-600 dark:text-gray-4">
                     {s.badge}
                   </span>
                 </div>
-                <h3 className="text-lg font-bold text-white">
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">
                   {s.title}
                 </h3>
-                <p className="mt-2.5 text-xs leading-relaxed text-gray-4">
+                <p className="mt-2.5 text-xs leading-relaxed text-slate-500 dark:text-gray-4">
                   {s.description}
                 </p>
               </BentoCard>

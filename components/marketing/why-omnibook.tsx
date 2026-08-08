@@ -24,7 +24,7 @@ export function WhyOmnibook() {
           <div className="mx-auto max-w-3xl">
             <MaskTextReveal
               text="Why traders choose Omnibook"
-              className="justify-center text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl"
+              className="justify-center text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl md:text-5xl"
             />
           </div>
         </AnimatedSection>
@@ -36,17 +36,17 @@ export function WhyOmnibook() {
               <AnimatedSection key={item.title} delay={idx * 0.08}>
                 <BentoCard className="flex flex-col justify-between p-6 text-left">
                   <div>
-                    <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-white/[0.08] bg-[#0c0c0c] text-white">
+                    <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-black/[0.08] dark:border-white/[0.08] bg-slate-100 dark:bg-[#0c0c0c] text-slate-900 dark:text-white">
                       <IconComp className="h-5 w-5 stroke-[1.75]" />
                     </div>
-                    <h3 className="text-base font-bold text-white">
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white">
                       {item.title}
                     </h3>
-                    <p className="mt-2 text-xs leading-relaxed text-gray-4">
+                    <p className="mt-2 text-xs leading-relaxed text-slate-500 dark:text-gray-4">
                       {item.desc}
                     </p>
                   </div>
-                  <div className="mt-4 flex items-center gap-1 font-mono text-[10px] font-medium text-gray-4">
+                  <div className="mt-4 flex items-center gap-1 font-mono text-[10px] font-medium text-slate-500 dark:text-gray-4">
                     ✓ VERIFIED FEATURE
                   </div>
                 </BentoCard>

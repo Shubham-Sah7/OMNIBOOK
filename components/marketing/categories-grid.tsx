@@ -49,7 +49,7 @@ export function CategoriesGrid() {
           <div className="mx-auto max-w-3xl">
             <MaskTextReveal
               text="Explore Every Category"
-              className="justify-center text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl"
+              className="justify-center text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl md:text-5xl"
             />
           </div>
         </AnimatedSection>
@@ -60,18 +60,18 @@ export function CategoriesGrid() {
               <Link href="#markets">
                 <BentoCard className="group relative flex min-h-[200px] flex-col justify-between p-6 text-left">
                   <div>
-                    <span className="mb-3.5 inline-block rounded border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 font-mono text-[10px] font-medium text-white">
+                    <span className="mb-3.5 inline-block rounded border border-black/[0.08] dark:border-white/[0.08] bg-slate-100 dark:bg-white/[0.03] px-2 py-0.5 font-mono text-[10px] font-medium text-slate-900 dark:text-white">
                       {cat.tag}
                     </span>
-                    <h3 className="text-xl font-bold text-white transition-colors group-hover:text-gray-2">
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white transition-colors group-hover:text-slate-700 dark:group-hover:text-gray-2">
                       {cat.title}
                     </h3>
-                    <p className="mt-2 text-xs leading-relaxed text-gray-4">
+                    <p className="mt-2 text-xs leading-relaxed text-slate-500 dark:text-gray-4">
                       {cat.description}
                     </p>
                   </div>
 
-                  <div className="mt-5 flex items-center gap-1.5 font-mono text-xs font-medium text-gray-4 transition-colors group-hover:text-white">
+                  <div className="mt-5 flex items-center gap-1.5 font-mono text-xs font-medium text-slate-500 dark:text-gray-4 transition-colors group-hover:text-slate-900 dark:group-hover:text-white">
                     View {cat.title} Markets <ArrowUpRight className="h-3.5 w-3.5" />
                   </div>
                 </BentoCard>

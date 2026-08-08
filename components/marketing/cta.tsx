@@ -11,12 +11,12 @@ export function CallToAction() {
         <AnimatedSection className="mb-4">
           <MaskTextReveal
             text="The next prediction is yours."
-            className="justify-center text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl"
+            className="justify-center text-4xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-5xl md:text-6xl"
           />
         </AnimatedSection>
 
         <AnimatedSection delay={0.2}>
-          <p className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-gray-3 md:text-lg">
+          <p className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-slate-600 dark:text-gray-3 md:text-lg">
             Join thousands of traders predicting the world&apos;s biggest events in real time.
           </p>
           <Link href="#markets" className="btn-primary">
