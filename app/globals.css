@@ -60,6 +60,20 @@
   }
 }
 
+/* Ticker Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
 /* Subtle continuous background grid lines (Linear / Vercel style) */
 .bg-grid-full {
   background-image:

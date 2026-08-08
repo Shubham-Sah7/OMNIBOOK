@@ -1,6 +1,7 @@
 "use client"
 
 import { Header } from "@/components/marketing/header"
+import { LiveMarketTickerBar } from "@/components/marketing/live-market-ticker-bar"
 import { Hero } from "@/components/marketing/hero"
 import { Stats } from "@/components/marketing/stats"
 import { BuiltForMarkets } from "@/components/marketing/built-for-markets"
@@ -15,6 +16,7 @@ import { CallToAction } from "@/components/marketing/cta"
 import { Footer } from "@/components/marketing/footer"
 import { SmoothScrollProvider } from "@/components/marketing/smooth-scroll"
 import { BgModeProvider } from "@/components/marketing/bg-mode-context"
+import { LiveTransactionFeed } from "@/components/marketing/live-transaction-feed"
 
 export default function Page() {
   return (
@@ -23,6 +25,7 @@ export default function Page() {
         <div className="relative min-h-screen bg-[#fbfbfd] dark:bg-[#0a0a0a] bg-grid-full text-slate-900 dark:text-white selection:bg-[#00D8F6] selection:text-black transition-colors duration-300">
           <div className="mx-auto max-w-[90rem]">
             <Header />
+            <LiveMarketTickerBar />
 
             <main>
               <Hero />
@@ -40,6 +43,9 @@ export default function Page() {
 
             <Footer />
           </div>
+
+          {/* Living Terminal Real-time Floating Trade Feed */}
+          <LiveTransactionFeed />
         </div>
       </BgModeProvider>
     </SmoothScrollProvider>
