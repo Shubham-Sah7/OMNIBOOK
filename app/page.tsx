@@ -15,12 +15,14 @@ import { CallToAction } from "@/components/marketing/cta"
 import { Footer } from "@/components/marketing/footer"
 import { SmoothScrollProvider } from "@/components/marketing/smooth-scroll"
 import { BgModeProvider } from "@/components/marketing/bg-mode-context"
+import { CustomCursor } from "@/components/marketing/custom-cursor"
 
 export default function Page() {
   return (
     <SmoothScrollProvider>
       <BgModeProvider>
         <div className="relative min-h-screen bg-[#fbfbfd] dark:bg-[#0a0a0a] bg-grid-full text-slate-900 dark:text-white selection:bg-[#00D8F6] selection:text-black transition-colors duration-300">
+          <CustomCursor />
           <div className="mx-auto max-w-[90rem]">
             <Header />
 

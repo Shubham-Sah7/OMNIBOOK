@@ -1,43 +1,48 @@
 "use client"
 
+import { useRef } from "react"
 import Link from "next/link"
-import { ArrowLeftRight, TrendingUp, ChevronRight, Timer, Activity, Zap } from "lucide-react"
-import { motion } from "framer-motion"
+import { ArrowLeftRight, TrendingUp, ChevronRight, Timer } from "lucide-react"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { SaaSProductShowcase } from "./saas-product-showcase"
 import { MaskTextReveal } from "./animated-section"
 import { MovingAbstractBackground } from "./moving-abstract-bg"
 
 export function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollY } = useScroll()
+
+  // Scroll Parallax Depth Transformations
+  const headlineY = useTransform(scrollY, [0, 600], [0, 80])
+  const leftCardY = useTransform(scrollY, [0, 600], [0, -60])
+  const rightCardY = useTransform(scrollY, [0, 600], [0, -90])
+
   return (
-    <section className="bg-grid-arena relative px-4 pt-16 pb-12 text-center md:px-6 md:pt-24 md:pb-16 overflow-hidden">
+    <section ref={containerRef} className="bg-grid-arena relative px-4 pt-16 pb-12 text-center md:px-6 md:pt-24 md:pb-16 overflow-hidden">
       {/* Moving Abstract Ambient Background Animation & Live Probability Wave Canvas */}
       <MovingAbstractBackground />
 
       <div className="relative z-10 mx-auto max-w-6xl">
-        {/* Floating Left Live Volume Widget (Desktop Only) */}
+        {/* Floating Left Live Volume Widget (Scroll Parallax Depth) */}
         <motion.div
-          animate={{ y: [0, -10, 0], x: [0, 5, 0] }}
+          style={{ y: leftCardY }}
+          animate={{ x: [0, 5, 0] }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-12 left-0 z-20 hidden lg:flex items-center gap-3 rounded-2xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-[#0d0e12]/80 px-4 py-2.5 backdrop-blur-xl shadow-xl select-none"
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#00D8F6]/10 text-[#00D8F6]">
-            <Activity className="h-4 w-4 stroke-[1.75]" />
-          </div>
           <div className="text-left font-mono text-xs">
             <span className="block text-[10px] text-slate-500 dark:text-gray-4 uppercase">LIVE VOL TODAY</span>
             <span className="font-bold text-slate-900 dark:text-white">$48,592.80</span>
           </div>
         </motion.div>
 
-        {/* Floating Right Settlement Speed Widget (Desktop Only) */}
+        {/* Floating Right Settlement Speed Widget (Scroll Parallax Depth) */}
         <motion.div
-          animate={{ y: [0, 10, 0], x: [0, -5, 0] }}
+          style={{ y: rightCardY }}
+          animate={{ x: [0, -5, 0] }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-16 right-0 z-20 hidden lg:flex items-center gap-3 rounded-2xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-[#0d0e12]/80 px-4 py-2.5 backdrop-blur-xl shadow-xl select-none"
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-500">
-            <Zap className="h-4 w-4 stroke-[1.75]" />
-          </div>
           <div className="text-left font-mono text-xs">
             <span className="block text-[10px] text-slate-500 dark:text-gray-4 uppercase">AVERAGE LATENCY</span>
             <span className="font-bold text-emerald-500">42ms <span className="text-[10px] text-slate-400 font-normal">(SUB-SECOND)</span></span>
@@ -71,13 +76,13 @@ export function Hero() {
           </span>
         </motion.div>
 
-        {/* Kinetic Word Reveal Headline with Electric Cyan Text Gradient Accent */}
-        <div className="mb-4">
+        {/* Kinetic Word Reveal Headline with Parallax Scroll Movement */}
+        <motion.div style={{ y: headlineY }} className="mb-4">
           <MaskTextReveal
             text="PREDICT THE NEXT MOVE"
             className="font-display justify-center text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white uppercase sm:text-7xl md:text-8xl lg:text-[6.25rem] lg:leading-[6.5rem]"
           />
-        </div>
+        </motion.div>
 
         {/* Spaced Sub-headline */}
         <motion.p
