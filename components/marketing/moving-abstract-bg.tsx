@@ -10,7 +10,70 @@ export function MovingAbstractBackground() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden select-none z-0">
       <AnimatePresence mode="wait">
-        {bgMode === "cosmos" ? (
+        {bgMode === "trading" ? (
+          <motion.div
+            key="trading-bg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7, ease: "easeInOut" }}
+            className="absolute inset-0 z-0 overflow-hidden"
+          >
+            {/* Abstract Trading Video Motion: Slow Ken Burns Glide & Scale */}
+            <motion.div
+              animate={{
+                scale: [1.02, 1.1, 1.04, 1.02],
+                x: [0, -20, 15, 0],
+                y: [0, -12, 10, 0],
+              }}
+              transition={{
+                duration: 24,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="absolute -inset-10 z-0"
+            >
+              <Image
+                src="/images/abstract_trading.png"
+                alt="Abstract Financial Trading Visual"
+                fill
+                priority
+                className="object-cover object-center opacity-85 dark:opacity-90"
+              />
+            </motion.div>
+
+            {/* Continuous Stock Market Light Beam Sweep */}
+            <motion.div
+              animate={{
+                x: ["-100%", "200%"],
+                y: ["-50%", "150%"],
+              }}
+              transition={{
+                duration: 7,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="absolute -top-1/2 -left-1/2 h-[200%] w-56 rotate-45 bg-gradient-to-r from-transparent via-[#00D8F6]/20 to-transparent blur-xl"
+            />
+
+            {/* Readability Overlay Gradient */}
+            <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#0a0a0a]/50 via-transparent to-[#0a0a0a]/90 dark:from-[#0a0a0a]/65 dark:via-transparent dark:to-[#0a0a0a]" />
+
+            {/* Ambient Cyan Glow Pulse */}
+            <motion.div
+              animate={{
+                scale: [0.95, 1.25, 0.95],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="absolute top-1/4 left-1/3 z-10 h-[500px] w-[500px] rounded-full bg-[#00D8F6]/25 blur-[140px]"
+            />
+          </motion.div>
+        ) : bgMode === "cosmos" ? (
           <motion.div
             key="cosmos-bg"
             initial={{ opacity: 0 }}

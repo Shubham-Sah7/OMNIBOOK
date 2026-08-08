@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X, Wallet, Sparkles, Grid } from "lucide-react"
+import { Menu, X, Wallet, TrendingUp, Sparkles, Grid } from "lucide-react"
 import { motion } from "framer-motion"
 import { Logo } from "./logo"
 import { ThemeToggle } from "./theme-toggle"
@@ -50,7 +50,7 @@ export function Header() {
           <Logo />
         </Link>
 
-        {/* Center: Navigation Links (No wrapping) */}
+        {/* Center: Navigation Links */}
         <ul className="hidden items-center gap-5 xl:gap-7 lg:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.href} className="shrink-0">
@@ -66,16 +66,21 @@ export function Header() {
 
         {/* Right: Background Nudge Switcher, Theme Switcher, Balance & CTA */}
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-          {/* Background Style Nudge Switcher (Grid / Space Orbit) */}
+          {/* Background Style Nudge Switcher (Trading Video / Cosmos / Grid) */}
           <button
             type="button"
             onClick={toggleBgMode}
-            className="flex items-center gap-1.5 rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-2.5 py-1 text-[11px] font-mono font-semibold text-slate-800 dark:text-white transition-all hover:bg-black/10 dark:hover:bg-white/10"
-            title="Switch Background Visual (Arena Grid / Cosmos Orbit)"
+            className="flex items-center gap-1.5 rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-3 py-1 text-[11px] font-mono font-semibold text-slate-800 dark:text-white transition-all hover:bg-black/10 dark:hover:bg-white/10"
+            title="Switch Background Visual (Trading Video / Cosmos / Arena Grid)"
           >
-            {bgMode === "cosmos" ? (
+            {bgMode === "trading" ? (
               <>
-                <Sparkles className="h-3.5 w-3.5 text-[#00D8F6] animate-pulse" />
+                <TrendingUp className="h-3.5 w-3.5 text-[#00D8F6] animate-pulse" />
+                <span className="hidden sm:inline">TRADING</span>
+              </>
+            ) : bgMode === "cosmos" ? (
+              <>
+                <Sparkles className="h-3.5 w-3.5 text-[#00D8F6]" />
                 <span className="hidden sm:inline">COSMOS</span>
               </>
             ) : (

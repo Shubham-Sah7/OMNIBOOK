@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState } from "react"
 
-type BgMode = "grid" | "cosmos"
+export type BgMode = "grid" | "trading" | "cosmos"
 
 type BgModeContextType = {
   bgMode: BgMode
@@ -11,16 +11,16 @@ type BgModeContextType = {
 }
 
 const BgModeContext = createContext<BgModeContextType>({
-  bgMode: "grid",
+  bgMode: "trading",
   setBgMode: () => {},
   toggleBgMode: () => {},
 })
 
 export function BgModeProvider({ children }: { children: React.ReactNode }) {
-  const [bgMode, setBgMode] = useState<BgMode>("grid")
+  const [bgMode, setBgMode] = useState<BgMode>("trading")
 
   const toggleBgMode = () => {
-    setBgMode((prev) => (prev === "grid" ? "cosmos" : "grid"))
+    setBgMode((prev) => (prev === "trading" ? "cosmos" : prev === "cosmos" ? "grid" : "trading"))
   }
 
   return (
