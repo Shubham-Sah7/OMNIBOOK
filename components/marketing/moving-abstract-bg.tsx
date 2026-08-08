@@ -16,18 +16,18 @@ export function MovingAbstractBackground() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
             className="absolute inset-0 z-0 overflow-hidden"
           >
             {/* Abstract Trading Video Motion: Slow Ken Burns Glide & Scale */}
             <motion.div
               animate={{
-                scale: [1.02, 1.1, 1.04, 1.02],
-                x: [0, -20, 15, 0],
-                y: [0, -12, 10, 0],
+                scale: [1.02, 1.12, 1.05, 1.02],
+                x: [0, -25, 20, 0],
+                y: [0, -15, 10, 0],
               }}
               transition={{
-                duration: 24,
+                duration: 22,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
@@ -38,7 +38,7 @@ export function MovingAbstractBackground() {
                 alt="Abstract Financial Trading Visual"
                 fill
                 priority
-                className="object-cover object-center opacity-85 dark:opacity-90"
+                className="object-cover object-center opacity-90 dark:opacity-95"
               />
             </motion.div>
 
@@ -49,28 +49,28 @@ export function MovingAbstractBackground() {
                 y: ["-50%", "150%"],
               }}
               transition={{
-                duration: 7,
+                duration: 6,
                 repeat: Infinity,
                 ease: "linear",
               }}
-              className="absolute -top-1/2 -left-1/2 h-[200%] w-56 rotate-45 bg-gradient-to-r from-transparent via-[#00D8F6]/20 to-transparent blur-xl"
+              className="absolute -top-1/2 -left-1/2 h-[200%] w-64 rotate-45 bg-gradient-to-r from-transparent via-[#00D8F6]/25 to-transparent blur-xl"
             />
 
-            {/* Readability Overlay Gradient */}
-            <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#0a0a0a]/50 via-transparent to-[#0a0a0a]/90 dark:from-[#0a0a0a]/65 dark:via-transparent dark:to-[#0a0a0a]" />
+            {/* Light & Dark Adaptive Soft Fade Gradient Overlay */}
+            <div className="absolute inset-0 z-10 bg-gradient-to-b from-white/30 via-transparent to-white/80 dark:from-[#0a0a0a]/30 dark:via-transparent dark:to-[#0a0a0a]/80" />
 
             {/* Ambient Cyan Glow Pulse */}
             <motion.div
               animate={{
                 scale: [0.95, 1.25, 0.95],
-                opacity: [0.3, 0.6, 0.3],
+                opacity: [0.35, 0.65, 0.35],
               }}
               transition={{
-                duration: 8,
+                duration: 7,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="absolute top-1/4 left-1/3 z-10 h-[500px] w-[500px] rounded-full bg-[#00D8F6]/25 blur-[140px]"
+              className="absolute top-1/4 left-1/3 z-10 h-[550px] w-[550px] rounded-full bg-[#00D8F6]/30 blur-[130px]"
             />
           </motion.div>
         ) : bgMode === "cosmos" ? (
@@ -79,19 +79,19 @@ export function MovingAbstractBackground() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
             className="absolute inset-0 z-0 overflow-hidden"
           >
             {/* Live Video Stock Motion Effect: Continuous Slow Pan & Ken Burns Scale */}
             <motion.div
               animate={{
-                scale: [1.02, 1.12, 1.05, 1.02],
-                x: [0, -30, 20, 0],
-                y: [0, -18, 12, 0],
-                rotate: [0, 0.6, -0.4, 0],
+                scale: [1.02, 1.14, 1.06, 1.02],
+                x: [0, -35, 25, 0],
+                y: [0, -20, 15, 0],
+                rotate: [0, 0.8, -0.5, 0],
               }}
               transition={{
-                duration: 26,
+                duration: 24,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
@@ -113,28 +113,28 @@ export function MovingAbstractBackground() {
                 y: ["-50%", "150%"],
               }}
               transition={{
-                duration: 8,
+                duration: 7,
                 repeat: Infinity,
                 ease: "linear",
               }}
-              className="absolute -top-1/2 -left-1/2 h-[200%] w-48 rotate-45 bg-gradient-to-r from-transparent via-[#00D8F6]/15 to-transparent blur-xl"
+              className="absolute -top-1/2 -left-1/2 h-[200%] w-56 rotate-45 bg-gradient-to-r from-transparent via-[#00D8F6]/20 to-transparent blur-xl"
             />
 
-            {/* Subtle Gradient Overlays for High-Contrast Typography Readability */}
-            <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#0a0a0a]/60 via-transparent to-[#0a0a0a]/90 dark:from-[#0a0a0a]/70 dark:via-transparent dark:to-[#0a0a0a]" />
+            {/* Light & Dark Adaptive Soft Fade Gradient Overlay */}
+            <div className="absolute inset-0 z-10 bg-gradient-to-b from-white/30 via-transparent to-white/80 dark:from-[#0a0a0a]/30 dark:via-transparent dark:to-[#0a0a0a]/80" />
 
             {/* Live Pulsing Cosmic Lens Flare Light */}
             <motion.div
               animate={{
-                scale: [0.9, 1.25, 0.9],
-                opacity: [0.25, 0.55, 0.25],
+                scale: [0.9, 1.3, 0.9],
+                opacity: [0.3, 0.6, 0.3],
               }}
               transition={{
-                duration: 9,
+                duration: 8,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="absolute top-1/4 right-1/3 z-10 h-[500px] w-[500px] rounded-full bg-[#00D8F6]/30 blur-[140px]"
+              className="absolute top-1/4 right-1/3 z-10 h-[550px] w-[550px] rounded-full bg-[#00D8F6]/35 blur-[130px]"
             />
           </motion.div>
         ) : (
@@ -152,14 +152,14 @@ export function MovingAbstractBackground() {
                 x: [-70, 70, -70],
                 y: [-50, 50, -50],
                 scale: [1, 1.25, 1],
-                opacity: [0.14, 0.26, 0.14],
+                opacity: [0.18, 0.32, 0.18],
               }}
               transition={{
-                duration: 16,
+                duration: 14,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="absolute top-1/4 left-1/2 h-[550px] w-[550px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00D8F6] blur-[140px]"
+              className="absolute top-1/4 left-1/2 h-[550px] w-[550px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#00D8F6] blur-[130px]"
             />
 
             {/* Live Video Motion: Secondary Soft Indigo Ambient Orb */}
@@ -168,14 +168,14 @@ export function MovingAbstractBackground() {
                 x: [90, -90, 90],
                 y: [40, -60, 40],
                 scale: [1.15, 0.85, 1.15],
-                opacity: [0.08, 0.18, 0.08],
+                opacity: [0.12, 0.22, 0.12],
               }}
               transition={{
-                duration: 22,
+                duration: 20,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="absolute top-1/3 left-1/3 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#102a45] blur-[160px]"
+              className="absolute top-1/3 left-1/3 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#102a45] blur-[150px]"
             />
 
             {/* Continuous Moving Stock Grid Scanner Line */}
@@ -184,11 +184,11 @@ export function MovingAbstractBackground() {
                 y: ["-100%", "250%"],
               }}
               transition={{
-                duration: 9,
+                duration: 8,
                 repeat: Infinity,
                 ease: "linear",
               }}
-              className="absolute left-0 right-0 h-44 bg-gradient-to-b from-transparent via-[#00D8F6]/[0.05] to-transparent"
+              className="absolute left-0 right-0 h-44 bg-gradient-to-b from-transparent via-[#00D8F6]/[0.08] to-transparent"
             />
           </motion.div>
         )}
