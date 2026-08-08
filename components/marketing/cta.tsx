@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowLeftRight } from "lucide-react"
 import { AnimatedSection, MaskTextReveal } from "./animated-section"
 
 export function CallToAction() {
@@ -19,8 +19,8 @@ export function CallToAction() {
           <p className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-slate-600 dark:text-gray-3 md:text-lg">
             Join thousands of traders predicting the world&apos;s biggest events in real time.
           </p>
-          <Link href="#markets" className="btn-primary">
-            Start Trading <ArrowRight className="h-4 w-4" />
+          <Link href="#markets" className="btn-primary hover:scale-[1.03]">
+            Start Trading <ArrowLeftRight className="h-4 w-4 stroke-[1.75]" />
           </Link>
         </AnimatedSection>
       </div>

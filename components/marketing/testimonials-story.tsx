@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Quote } from "lucide-react"
+import { Quote, Users } from "lucide-react"
 
 const TESTIMONIALS = [
   {
@@ -30,7 +30,8 @@ export function TestimonialsStory() {
     <section className="relative py-12 md:py-16">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="mb-8 text-center md:mb-10">
-          <div className="linear-badge mb-3">
+          <div className="linear-badge mb-3 flex items-center justify-center gap-1.5 mx-auto w-max">
+            <Users className="h-3.5 w-3.5 stroke-[1.75] text-[#00D8F6]" />
             COMMUNITY
           </div>
           <h2 className="mx-auto max-w-3xl text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl md:text-5xl">

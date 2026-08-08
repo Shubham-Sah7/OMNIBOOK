@@ -1,16 +1,16 @@
 "use client"
 
-import { TrendingUp, Eye, Zap, DollarSign, Trophy, Clock } from "lucide-react"
+import { Activity, ShieldCheck, BadgeCheck, Coins, Trophy, Timer } from "lucide-react"
 import { AnimatedSection, MaskTextReveal } from "./animated-section"
 import { BentoCard } from "./bento-spotlight"
 
 const CARDS = [
-  { icon: TrendingUp, title: "Real-Time Pricing", desc: "Order book updates probabilities dynamically with every trade executed." },
-  { icon: Eye, title: "Transparent Markets", desc: "Open liquidity pools and verifiable smart contract resolution." },
-  { icon: Zap, title: "Instant Settlement", desc: "Winnings credit to your account balance the exact second the round finishes." },
-  { icon: DollarSign, title: "Low Entry Cost", desc: "Predict on global events starting at just 1¢ per contract share." },
+  { icon: Activity, title: "Real-Time Pricing", desc: "Order book updates probabilities dynamically with every trade executed." },
+  { icon: ShieldCheck, title: "Transparent Markets", desc: "Open liquidity pools and verifiable smart contract resolution." },
+  { icon: BadgeCheck, title: "Instant Settlement", desc: "Winnings credit to your account balance the exact second the round finishes." },
+  { icon: Coins, title: "Low Entry Cost", desc: "Predict on global events starting at just 1¢ per contract share." },
   { icon: Trophy, title: "Leaderboards", desc: "Climb the weekly rankings and compete for extra trainer prizes." },
-  { icon: Clock, title: "24/7 Trading", desc: "Continuous 60-second and multi-day prediction markets running 365 days a year." },
+  { icon: Timer, title: "24/7 Trading", desc: "Continuous 60-second and multi-day prediction markets running 365 days a year." },
 ]
 
 export function WhyOmnibook() {
@@ -36,7 +36,7 @@ export function WhyOmnibook() {
               <AnimatedSection key={item.title} delay={idx * 0.08}>
                 <BentoCard className="flex flex-col justify-between p-6 text-left">
                   <div>
-                    <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-black/[0.08] dark:border-white/[0.08] bg-slate-100 dark:bg-[#0c0c0c] text-slate-900 dark:text-white">
+                    <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-black/10 dark:border-white/10 bg-[#00D8F6]/10 text-[#00D8F6] shadow-sm">
                       <IconComp className="h-5 w-5 stroke-[1.75]" />
                     </div>
                     <h3 className="text-base font-bold text-slate-900 dark:text-white">

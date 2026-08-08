@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { Trophy } from "lucide-react"
+import { Trophy, Coins } from "lucide-react"
 import { motion } from "framer-motion"
 import { AnimatedSection } from "./animated-section"
 
@@ -30,11 +30,12 @@ export function Leaderboard() {
     <section id="leaderboard" className="relative py-12 md:py-16">
       <div className="mx-auto max-w-5xl px-4 md:px-6">
         <AnimatedSection className="mb-8 text-center md:mb-10">
-          <div className="linear-badge mb-3">
+          <div className="linear-badge mb-3 flex items-center justify-center gap-1.5 mx-auto w-max">
+            <Trophy className="h-3.5 w-3.5 stroke-[1.75] text-[#00D8F6]" />
             SEASON 1 STANDINGS
           </div>
           <h2 className="mx-auto max-w-3xl text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl md:text-5xl">
-            Trusted by the best prediction traders
+            Trusted by top prediction traders
           </h2>
           <p className="mt-3 mx-auto max-w-xl text-base leading-relaxed text-slate-600 dark:text-gray-3">
             Watch top traders climb the rankings in real time.
@@ -45,10 +46,13 @@ export function Leaderboard() {
         <AnimatedSection delay={0.15} className="overflow-hidden rounded-xl border border-black/[0.08] dark:border-white/[0.08] bg-white dark:bg-[#111111] p-6 shadow-sm dark:shadow-lg">
           <div className="mb-5 flex items-center justify-between border-b border-black/[0.06] dark:border-white/[0.06] pb-4">
             <div className="flex items-center gap-2">
-              <Trophy className="h-4 w-4 stroke-[1.75] text-slate-900 dark:text-white" />
+              <Trophy className="h-4 w-4 stroke-[1.75] text-[#00D8F6]" />
               <span className="font-mono text-xs font-semibold text-slate-900 dark:text-white uppercase">Live Standings</span>
             </div>
-            <span className="font-mono text-xs text-slate-500 dark:text-gray-4">Updated every minute</span>
+            <span className="flex items-center gap-1 font-mono text-xs text-slate-500 dark:text-gray-4">
+              <Coins className="h-3.5 w-3.5 stroke-[1.75] text-amber-500" />
+              Updated every minute
+            </span>
           </div>
 
           <div className="space-y-2 font-mono text-xs">
@@ -59,10 +63,20 @@ export function Leaderboard() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                className="flex items-center justify-between rounded-lg border border-black/[0.04] dark:border-white/[0.04] bg-slate-50 dark:bg-[#0c0c0c] px-4 py-2.5 transition-colors hover:border-black/[0.12] dark:hover:border-white/[0.12]"
+                className={`flex items-center justify-between rounded-lg border px-4 py-2.5 transition-all hover:scale-[1.01] ${
+                  user.rank === 1
+                    ? "border-[#00D8F6]/40 bg-[#00D8F6]/[0.06] text-slate-900 dark:text-white font-bold"
+                    : user.rank === 2
+                    ? "border-amber-500/30 bg-amber-500/[0.04] text-slate-900 dark:text-white"
+                    : user.rank === 3
+                    ? "border-slate-400/30 bg-slate-400/[0.04] text-slate-900 dark:text-white"
+                    : "border-black/[0.04] dark:border-white/[0.04] bg-slate-50 dark:bg-[#0c0c0c] hover:border-black/[0.12] dark:hover:border-white/[0.12]"
+                }`}
               >
                 <div className="flex items-center gap-3.5">
-                  <span className="w-5 text-center font-bold text-slate-400 dark:text-gray-4">{user.rank}</span>
+                  <span className="w-5 text-center font-bold text-slate-700 dark:text-gray-3">
+                    {user.rank === 1 ? "🥇" : user.rank === 2 ? "🥈" : user.rank === 3 ? "🥉" : user.rank}
+                  </span>
                   <div className="relative h-7 w-7 shrink-0 overflow-hidden rounded-full border border-black/10 dark:border-white/10 bg-slate-200 dark:bg-gray-9">
                     <Image
                       src={user.avatar}
@@ -74,7 +88,7 @@ export function Leaderboard() {
                   </div>
                   <span className="font-medium text-slate-800 dark:text-gray-2">{user.name}</span>
                 </div>
-                <span className="font-bold text-slate-900 dark:text-white">
+                <span className="font-bold text-[#00D8F6] dark:text-[#00D8F6]">
                   {user.profit}
                 </span>
               </motion.div>

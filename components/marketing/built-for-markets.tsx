@@ -1,8 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Activity, Clock, ShieldCheck, Globe, Check, Zap, Cpu, Database } from "lucide-react"
-import { motion } from "framer-motion"
+import { ChartCandlestick, BadgeCheck, ShieldCheck, Globe, Check, Cpu, Database } from "lucide-react"
 import { BentoCard } from "./bento-spotlight"
 import { AnimatedSection, MaskTextReveal } from "./animated-section"
 
@@ -39,7 +38,7 @@ export function BuiltForMarkets() {
                 <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-black/10 dark:border-white/10 bg-[#00D8F6]/10 text-[#00D8F6] shadow-sm">
-                      <Activity className="h-5 w-5 stroke-[2]" />
+                      <ChartCandlestick className="h-5 w-5 stroke-[1.75]" />
                     </div>
                     <div>
                       <h3 className="text-lg font-bold text-slate-900 dark:text-white">Live Order Book Depth</h3>
@@ -47,7 +46,7 @@ export function BuiltForMarkets() {
                     </div>
                   </div>
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 font-mono text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                    <Check className="h-3.5 w-3.5" /> MATCHING ENGINE ACTIVE
+                    <Check className="h-3.5 w-3.5 stroke-[1.75]" /> MATCHING ENGINE ACTIVE
                   </span>
                 </div>
 
@@ -94,7 +93,7 @@ export function BuiltForMarkets() {
             <BentoCard className="flex flex-col justify-between p-7 text-left md:p-8">
               <div>
                 <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-black/10 dark:border-white/10 bg-[#00D8F6]/10 text-[#00D8F6] shadow-sm">
-                  <Clock className="h-5 w-5 stroke-[2]" />
+                  <BadgeCheck className="h-5 w-5 stroke-[1.75]" />
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">Sub-Second Settlement</h3>
                 <p className="mt-2 text-xs leading-relaxed text-slate-500 dark:text-gray-4">
@@ -117,7 +116,7 @@ export function BuiltForMarkets() {
             <BentoCard className="flex flex-col justify-between p-7 text-left md:p-8">
               <div>
                 <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-black/10 dark:border-white/10 bg-[#00D8F6]/10 text-[#00D8F6] shadow-sm">
-                  <ShieldCheck className="h-5 w-5 stroke-[2]" />
+                  <ShieldCheck className="h-5 w-5 stroke-[1.75]" />
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">Transparent Oracle Resolution</h3>
                 <p className="mt-2 text-xs leading-relaxed text-slate-500 dark:text-gray-4">
@@ -129,14 +128,14 @@ export function BuiltForMarkets() {
               <div className="mt-6 space-y-2 font-mono text-[11px]">
                 <div className="flex items-center justify-between rounded-lg border border-black/[0.06] dark:border-white/[0.06] bg-slate-50 dark:bg-[#07080c] px-3 py-2 text-slate-700 dark:text-gray-3">
                   <span className="flex items-center gap-2">
-                    <Database className="h-3.5 w-3.5 text-slate-500 dark:text-gray-4" />
+                    <Database className="h-3.5 w-3.5 stroke-[1.75] text-slate-500 dark:text-gray-4" />
                     Global API Feeds
                   </span>
                   <span className="font-bold text-emerald-500">SYNCED</span>
                 </div>
                 <div className="flex items-center justify-between rounded-lg border border-black/[0.06] dark:border-white/[0.06] bg-slate-50 dark:bg-[#07080c] px-3 py-2 text-slate-700 dark:text-gray-3">
                   <span className="flex items-center gap-2">
-                    <Cpu className="h-3.5 w-3.5 text-slate-500 dark:text-gray-4" />
+                    <Cpu className="h-3.5 w-3.5 stroke-[1.75] text-slate-500 dark:text-gray-4" />
                     Multi-Sig Consensus
                   </span>
                   <span className="font-bold text-emerald-500">VERIFIED</span>
@@ -150,7 +149,7 @@ export function BuiltForMarkets() {
             <BentoCard className="flex flex-col justify-between p-7 text-left md:p-8">
               <div>
                 <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-black/10 dark:border-white/10 bg-[#00D8F6]/10 text-[#00D8F6] shadow-sm">
-                  <Globe className="h-5 w-5 stroke-[2]" />
+                  <Globe className="h-5 w-5 stroke-[1.75]" />
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">Global Event Index</h3>
                 <p className="mt-2 text-xs leading-relaxed text-slate-500 dark:text-gray-4">

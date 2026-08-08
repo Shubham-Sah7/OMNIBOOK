@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X, Wallet, TrendingUp, Sparkles, Grid } from "lucide-react"
+import { Menu, X, Wallet, Sparkles, Grid, ArrowLeftRight } from "lucide-react"
 import { motion } from "framer-motion"
 import { Logo } from "./logo"
 import { ThemeToggle } from "./theme-toggle"
@@ -66,26 +66,26 @@ export function Header() {
 
         {/* Right: Background Nudge Switcher, Theme Switcher, Balance & CTA */}
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-          {/* Background Style Nudge Switcher (Trading Video / Cosmos / Grid) */}
+          {/* Background Style Nudge Switcher (Trading / Cosmos / Grid) */}
           <button
             type="button"
             onClick={toggleBgMode}
-            className="flex items-center gap-1.5 rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-3 py-1 text-[11px] font-mono font-semibold text-slate-800 dark:text-white transition-all hover:bg-black/10 dark:hover:bg-white/10"
-            title="Switch Background Visual (Trading Video / Cosmos / Arena Grid)"
+            className="flex items-center gap-1.5 rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-3 py-1 text-[11px] font-mono font-semibold text-slate-800 dark:text-white transition-all hover:bg-black/10 dark:hover:bg-white/10 hover:scale-[1.03]"
+            title="Switch Background Visual (Trading / Cosmos / Grid)"
           >
             {bgMode === "trading" ? (
               <>
-                <TrendingUp className="h-3.5 w-3.5 text-[#00D8F6] animate-pulse" />
+                <ArrowLeftRight className="h-3.5 w-3.5 stroke-[1.75] text-[#00D8F6] animate-pulse" />
                 <span className="hidden sm:inline">TRADING</span>
               </>
             ) : bgMode === "cosmos" ? (
               <>
-                <Sparkles className="h-3.5 w-3.5 text-[#00D8F6]" />
+                <Sparkles className="h-3.5 w-3.5 stroke-[1.75] text-[#00D8F6]" />
                 <span className="hidden sm:inline">COSMOS</span>
               </>
             ) : (
               <>
-                <Grid className="h-3.5 w-3.5 text-slate-600 dark:text-gray-3" />
+                <Grid className="h-3.5 w-3.5 stroke-[1.75] text-slate-600 dark:text-gray-3" />
                 <span className="hidden sm:inline">GRID</span>
               </>
             )}
@@ -96,11 +96,11 @@ export function Header() {
 
           {/* User Balance Indicator */}
           <div className="hidden items-center gap-2 rounded-full border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.03] dark:bg-white/[0.03] px-3 py-1.5 font-mono text-xs font-medium text-slate-800 dark:text-gray-2 sm:flex">
-            <Wallet className="h-3.5 w-3.5 text-slate-500 dark:text-gray-4" />
+            <Wallet className="h-3.5 w-3.5 stroke-[1.75] text-slate-500 dark:text-gray-4" />
             <span>$90.42</span>
           </div>
 
-          <Link href="#markets" className="btn-primary rounded-full px-5 whitespace-nowrap">
+          <Link href="#markets" className="btn-primary rounded-full px-5 whitespace-nowrap hover:scale-[1.03]">
             Start Trading
           </Link>
 
@@ -111,9 +111,9 @@ export function Header() {
             className="ml-1 flex h-9 w-9 items-center justify-center rounded-full border border-black/[0.12] dark:border-white/[0.12] bg-slate-100 dark:bg-[#111111] lg:hidden"
           >
             {open ? (
-              <X className="h-4 w-4 text-slate-700 dark:text-gray-3" />
+              <X className="h-4 w-4 stroke-[1.75] text-slate-700 dark:text-gray-3" />
             ) : (
-              <Menu className="h-4 w-4 text-slate-700 dark:text-gray-3" />
+              <Menu className="h-4 w-4 stroke-[1.75] text-slate-700 dark:text-gray-3" />
             )}
           </button>
         </div>

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight, TrendingUp, ChevronRight } from "lucide-react"
+import { ArrowLeftRight, TrendingUp, ChevronRight, Timer } from "lucide-react"
 import { motion } from "framer-motion"
 import { SaaSProductShowcase } from "./saas-product-showcase"
 import { MaskTextReveal } from "./animated-section"
@@ -28,7 +28,8 @@ export function Hero() {
 
           <span className="h-3 w-[1px] bg-black/20 dark:bg-white/20" />
 
-          <span className="font-mono text-[11px] font-medium text-slate-600 dark:text-gray-3">
+          <span className="flex items-center gap-1 font-mono text-[11px] font-medium text-slate-600 dark:text-gray-3">
+            <Timer className="h-3 w-3 stroke-[1.75] text-[#00D8F6]" />
             60s ROUNDS
           </span>
 
@@ -36,7 +37,7 @@ export function Hero() {
 
           <span className="flex items-center gap-1 font-mono text-[11px] font-semibold text-slate-900 dark:text-white">
             15K+ TRADERS
-            <ChevronRight className="h-3 w-3 text-slate-500 dark:text-gray-4" />
+            <ChevronRight className="h-3 w-3 stroke-[1.75] text-slate-500 dark:text-gray-4" />
           </span>
         </motion.div>
 
@@ -75,11 +76,11 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mb-10 flex flex-wrap items-center justify-center gap-4"
         >
-          <Link href="#markets" className="btn-primary">
-            Start Trading <ArrowRight className="h-4 w-4" />
+          <Link href="#markets" className="btn-primary hover:scale-[1.03]">
+            Start Trading <ArrowLeftRight className="h-4 w-4 stroke-[1.75]" />
           </Link>
-          <Link href="#markets" className="btn-secondary">
-            Explore Markets <TrendingUp className="h-4 w-4 text-slate-500 dark:text-gray-4" />
+          <Link href="#markets" className="btn-secondary hover:scale-[1.03]">
+            Explore Markets <TrendingUp className="h-4 w-4 stroke-[1.75] text-slate-500 dark:text-gray-4" />
           </Link>
         </motion.div>
 

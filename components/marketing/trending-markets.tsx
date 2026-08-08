@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowUpRight, Clock } from "lucide-react"
+import { ArrowLeftRight, Timer, ChartCandlestick } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { AnimatedSection, MaskTextReveal } from "./animated-section"
 
@@ -38,7 +38,8 @@ export function TrendingMarkets() {
     <section id="markets" className="relative py-12 md:py-16">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <AnimatedSection className="mb-8 text-center md:mb-10">
-          <div className="linear-badge mb-3">
+          <div className="linear-badge mb-3 flex items-center justify-center gap-1.5">
+            <ChartCandlestick className="h-3.5 w-3.5 stroke-[1.75] text-[#00D8F6]" />
             LIVE ORDER BOOK
           </div>
           <div className="mx-auto max-w-3xl">
@@ -59,7 +60,7 @@ export function TrendingMarkets() {
               key={cat}
               type="button"
               onClick={() => setSelectedCat(cat)}
-              className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
+              className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all hover:scale-[1.03] ${
                 selectedCat === cat
                   ? "border border-slate-900/20 dark:border-white/20 bg-slate-900/10 dark:bg-white/10 text-slate-900 dark:text-white shadow-sm"
                   : "border border-transparent bg-black/[0.03] dark:bg-white/[0.03] text-slate-600 dark:text-gray-4 hover:border-black/10 dark:hover:border-white/10 hover:text-slate-900 dark:hover:text-white"
@@ -120,16 +121,16 @@ export function TrendingMarkets() {
                       </td>
                       <td className="px-6 py-3.5 text-right text-slate-500 dark:text-gray-4">
                         <span className="inline-flex items-center gap-1">
-                          <Clock className="h-3 w-3 text-slate-400 dark:text-gray-4" />
+                          <Timer className="h-3.5 w-3.5 stroke-[1.75] text-slate-400 dark:text-gray-4" />
                           {item.timeRemaining}
                         </span>
                       </td>
                       <td className="px-6 py-3.5 text-center">
                         <button
                           type="button"
-                          className="inline-flex items-center gap-1 rounded bg-[#00D8F6] px-3 py-1 font-mono text-[11px] font-bold uppercase text-[#001D26] transition-all hover:bg-[#00c4e0]"
+                          className="inline-flex items-center gap-1 rounded bg-[#00D8F6] px-3 py-1 font-mono text-[11px] font-bold uppercase text-[#001D26] transition-all hover:bg-[#00c4e0] hover:scale-[1.05]"
                         >
-                          Trade <ArrowUpRight className="h-3 w-3" />
+                          Trade <ArrowLeftRight className="h-3 w-3 stroke-[1.75]" />
                         </button>
                       </td>
                     </motion.tr>

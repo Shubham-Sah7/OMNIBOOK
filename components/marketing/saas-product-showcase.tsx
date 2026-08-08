@@ -1,8 +1,8 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Clock, ShieldCheck, Zap, TrendingUp, Check } from "lucide-react"
-import { motion } from "framer-motion"
+import { useState, useEffect, useRef } from "react"
+import { Clock, ShieldCheck, Zap, ArrowLeftRight, Check } from "lucide-react"
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 
 export function SaaSProductShowcase() {
   const [btcPrice, setBtcPrice] = useState(64596.90)
@@ -11,6 +11,30 @@ export function SaaSProductShowcase() {
   const [selectedSide, setSelectedSide] = useState<"yes" | "no">("yes")
   const [yesPrice] = useState(62)
   const [activeTab, setActiveTab] = useState<"btc" | "eth" | "sol">("btc")
+
+  // Mouse 3D Parallax Perspective Tilt
+  const cardRef = useRef<HTMLDivElement>(null)
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), { damping: 25, stiffness: 200 })
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), { damping: 25, stiffness: 200 })
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    const width = rect.width
+    const height = rect.height
+    const mouseXPos = (e.clientX - rect.left) / width - 0.5
+    const mouseYPos = (e.clientY - rect.top) / height - 0.5
+    mouseX.set(mouseXPos)
+    mouseY.set(mouseYPos)
+  }
+
+  const handleMouseLeave = () => {
+    mouseX.set(0)
+    mouseY.set(0)
+  }
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -21,10 +45,12 @@ export function SaaSProductShowcase() {
   }, [])
 
   return (
-    <div className="perspective-1200 w-full max-w-5xl mx-auto py-6">
+    <div className="perspective-1200 w-full max-w-5xl mx-auto py-6" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
       <motion.div
-        initial={{ opacity: 0, y: 50, scale: 0.93, rotateX: 12 }}
-        animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+        ref={cardRef}
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        initial={{ opacity: 0, y: 50, scale: 0.93 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 1.1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className="relative mx-auto w-full"
       >
@@ -123,7 +149,7 @@ export function SaaSProductShowcase() {
                     <div className="text-right">
                       <span className="font-mono text-[11px] font-semibold text-gray-4 uppercase">ROUND CLOSES</span>
                       <p className="flex items-center justify-end gap-1.5 font-mono text-2xl font-bold text-white sm:text-3xl">
-                        <Clock className="h-5 w-5 text-gray-4" />
+                        <Clock className="h-5 w-5 stroke-[1.75] text-[#00D8F6]" />
                         {timeLeft.toFixed(2)}s
                       </p>
                     </div>
@@ -202,7 +228,7 @@ export function SaaSProductShowcase() {
 
                 <div className="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-4 font-mono text-xs text-gray-4">
                   <span className="flex items-center gap-1.5">
-                    <ShieldCheck className="h-4 w-4 text-gray-4" />
+                    <ShieldCheck className="h-4 w-4 stroke-[1.75] text-[#00D8F6]" />
                     Smart Contract Verified Settlement
                   </span>
                   <span>24/7 Liquidity</span>
@@ -229,7 +255,7 @@ export function SaaSProductShowcase() {
                           key={val}
                           type="button"
                           onClick={() => setAmount(val)}
-                          className={`rounded-lg py-2 font-mono text-xs font-bold transition-all ${
+                          className={`rounded-lg py-2 font-mono text-xs font-bold transition-all hover:scale-[1.03] ${
                             amount === val
                               ? "bg-[#00D8F6] text-[#001D26] shadow-md"
                               : "border border-white/[0.08] bg-white/[0.03] text-gray-3 hover:border-white/20 hover:text-white"
@@ -246,7 +272,7 @@ export function SaaSProductShowcase() {
                     <button
                       type="button"
                       onClick={() => setSelectedSide("yes")}
-                      className={`flex flex-col items-start rounded-xl border p-4 font-mono transition-all ${
+                      className={`flex flex-col items-start rounded-xl border p-4 font-mono transition-all hover:scale-[1.02] ${
                         selectedSide === "yes"
                           ? "border-[#00D8F6] bg-[#00333E]/60 text-white shadow-lg"
                           : "border-white/[0.08] bg-white/[0.02] text-gray-4 hover:border-white/20"
@@ -254,7 +280,7 @@ export function SaaSProductShowcase() {
                     >
                       <div className="flex w-full justify-between items-center text-xs text-gray-4">
                         <span>OUTCOME</span>
-                        {selectedSide === "yes" && <Check className="h-3.5 w-3.5 text-[#00D8F6]" />}
+                        {selectedSide === "yes" && <Check className="h-3.5 w-3.5 stroke-[1.75] text-[#00D8F6]" />}
                       </div>
                       <div className="mt-1 flex w-full justify-between items-baseline">
                         <span className="text-lg font-bold text-white">YES</span>
@@ -265,7 +291,7 @@ export function SaaSProductShowcase() {
                     <button
                       type="button"
                       onClick={() => setSelectedSide("no")}
-                      className={`flex flex-col items-start rounded-xl border p-4 font-mono transition-all ${
+                      className={`flex flex-col items-start rounded-xl border p-4 font-mono transition-all hover:scale-[1.02] ${
                         selectedSide === "no"
                           ? "border-[#E15252] bg-[#3B1212]/60 text-white shadow-lg"
                           : "border-white/[0.08] bg-white/[0.02] text-gray-4 hover:border-white/20"
@@ -273,7 +299,7 @@ export function SaaSProductShowcase() {
                     >
                       <div className="flex w-full justify-between items-center text-xs text-gray-4">
                         <span>OUTCOME</span>
-                        {selectedSide === "no" && <Check className="h-3.5 w-3.5 text-[#E15252]" />}
+                        {selectedSide === "no" && <Check className="h-3.5 w-3.5 stroke-[1.75] text-[#E15252]" />}
                       </div>
                       <div className="mt-1 flex w-full justify-between items-baseline">
                         <span className="text-lg font-bold text-white">NO</span>
@@ -298,9 +324,9 @@ export function SaaSProductShowcase() {
                 {/* Execute Order CTA Button */}
                 <button
                   type="button"
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#00D8F6] py-3.5 font-display text-sm font-bold uppercase tracking-wider text-[#001D26] transition-all hover:bg-[#00c4e0] hover:shadow-[0_0_24px_rgba(0,216,246,0.4)]"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#00D8F6] py-3.5 font-display text-sm font-bold uppercase tracking-wider text-[#001D26] transition-all hover:bg-[#00c4e0] hover:shadow-[0_0_24px_rgba(0,216,246,0.4)] hover:scale-[1.02]"
                 >
-                  <Zap className="h-4 w-4 fill-current" />
+                  <Zap className="h-4 w-4 stroke-[1.75] fill-current" />
                   CONFIRM {selectedSide.toUpperCase()} POSITION (${amount})
                 </button>
               </div>

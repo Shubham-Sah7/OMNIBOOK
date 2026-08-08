@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowLeftRight, LayoutGrid } from "lucide-react"
 import { AnimatedSection, MaskTextReveal } from "./animated-section"
 import { BentoCard } from "./bento-spotlight"
 
@@ -43,7 +43,8 @@ export function CategoriesGrid() {
     <section className="relative py-12 md:py-16">
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <AnimatedSection className="mb-8 text-center md:mb-10">
-          <div className="linear-badge mb-3">
+          <div className="linear-badge mb-3 flex items-center justify-center gap-1.5">
+            <LayoutGrid className="h-3.5 w-3.5 stroke-[1.75] text-[#00D8F6]" />
             MARKET INDEX
           </div>
           <div className="mx-auto max-w-3xl">
@@ -72,7 +73,7 @@ export function CategoriesGrid() {
                   </div>
 
                   <div className="mt-5 flex items-center gap-1.5 font-mono text-xs font-medium text-slate-500 dark:text-gray-4 transition-colors group-hover:text-slate-900 dark:group-hover:text-white">
-                    View {cat.title} Markets <ArrowUpRight className="h-3.5 w-3.5" />
+                    View {cat.title} Markets <ArrowLeftRight className="h-3.5 w-3.5 stroke-[1.75]" />
                   </div>
                 </BentoCard>
               </Link>
