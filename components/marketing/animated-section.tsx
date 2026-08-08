@@ -16,16 +16,16 @@ export function AnimatedSection({
   delay = 0,
   direction = "up",
 }: AnimatedSectionProps) {
-  const yOffset = direction === "up" ? 45 : direction === "down" ? -45 : 0
+  const yOffset = direction === "up" ? 50 : direction === "down" ? -50 : 0
 
   return (
     <motion.div
       initial={{
         opacity: 0,
         y: yOffset,
-        scale: 0.96,
-        rotateX: direction !== "none" ? 8 : 0,
-        filter: "blur(12px)",
+        scale: 0.95,
+        rotateX: direction !== "none" ? 12 : 0,
+        filter: "blur(14px)",
       }}
       whileInView={{
         opacity: 1,
@@ -34,9 +34,9 @@ export function AnimatedSection({
         rotateX: 0,
         filter: "blur(0px)",
       }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-70px" }}
       transition={{
-        duration: 0.85,
+        duration: 0.9,
         delay,
         ease: [0.16, 1, 0.3, 1],
       }}
@@ -65,7 +65,7 @@ export function MaskTextReveal({ text, className = "", delay = 0 }: MaskTextReve
       variants={{
         visible: {
           transition: {
-            staggerChildren: 0.05,
+            staggerChildren: 0.06,
             delayChildren: delay,
           },
         },
@@ -76,23 +76,70 @@ export function MaskTextReveal({ text, className = "", delay = 0 }: MaskTextReve
         <span key={i} className="inline-block overflow-hidden py-1">
           <motion.span
             variants={{
-              hidden: { y: "110%", opacity: 0, rotateX: 30 },
+              hidden: {
+                y: "120%",
+                opacity: 0,
+                rotateX: 45,
+                scale: 0.92,
+                filter: "blur(8px)",
+              },
               visible: {
                 y: "0%",
                 opacity: 1,
                 rotateX: 0,
+                scale: 1,
+                filter: "blur(0px)",
                 transition: {
-                  duration: 0.75,
+                  duration: 0.85,
                   ease: [0.16, 1, 0.3, 1],
                 },
               },
             }}
-            className="inline-block"
+            style={{ transformStyle: "preserve-3d", display: "inline-block" }}
           >
             {word}
           </motion.span>
         </span>
       ))}
+    </motion.div>
+  )
+}
+
+interface Kinetic3DRevealProps {
+  children: React.ReactNode
+  className?: string
+  delay?: number
+}
+
+export function Kinetic3DReveal({ children, className = "", delay = 0 }: Kinetic3DRevealProps) {
+  return (
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 60,
+        rotateX: 18,
+        rotateY: -8,
+        scale: 0.93,
+        filter: "blur(16px)",
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        rotateX: 0,
+        rotateY: 0,
+        scale: 1,
+        filter: "blur(0px)",
+      }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{
+        duration: 1.05,
+        delay,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      style={{ transformStyle: "preserve-3d" }}
+      className={className}
+    >
+      {children}
     </motion.div>
   )
 }
