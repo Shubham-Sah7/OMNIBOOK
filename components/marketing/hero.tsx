@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowLeftRight, TrendingUp, ChevronRight, Timer } from "lucide-react"
+import { ArrowLeftRight, TrendingUp, ChevronRight, Timer, Activity, Zap } from "lucide-react"
 import { motion } from "framer-motion"
 import { SaaSProductShowcase } from "./saas-product-showcase"
 import { MaskTextReveal } from "./animated-section"
@@ -10,16 +10,46 @@ import { MovingAbstractBackground } from "./moving-abstract-bg"
 export function Hero() {
   return (
     <section className="bg-grid-arena relative px-4 pt-16 pb-12 text-center md:px-6 md:pt-24 md:pb-16 overflow-hidden">
-      {/* Moving Abstract Ambient Background Animation */}
+      {/* Moving Abstract Ambient Background Animation & Live Probability Wave Canvas */}
       <MovingAbstractBackground />
 
-      <div className="relative z-10 mx-auto max-w-5xl">
+      <div className="relative z-10 mx-auto max-w-6xl">
+        {/* Floating Left Live Volume Widget (Desktop Only) */}
+        <motion.div
+          animate={{ y: [0, -10, 0], x: [0, 5, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-12 left-0 z-20 hidden lg:flex items-center gap-3 rounded-2xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-[#0d0e12]/80 px-4 py-2.5 backdrop-blur-xl shadow-xl select-none"
+        >
+          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#00D8F6]/10 text-[#00D8F6]">
+            <Activity className="h-4 w-4 stroke-[1.75]" />
+          </div>
+          <div className="text-left font-mono text-xs">
+            <span className="block text-[10px] text-slate-500 dark:text-gray-4 uppercase">LIVE VOL TODAY</span>
+            <span className="font-bold text-slate-900 dark:text-white">$48,592.80</span>
+          </div>
+        </motion.div>
+
+        {/* Floating Right Settlement Speed Widget (Desktop Only) */}
+        <motion.div
+          animate={{ y: [0, 10, 0], x: [0, -5, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-16 right-0 z-20 hidden lg:flex items-center gap-3 rounded-2xl border border-black/10 dark:border-white/10 bg-white/80 dark:bg-[#0d0e12]/80 px-4 py-2.5 backdrop-blur-xl shadow-xl select-none"
+        >
+          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-500">
+            <Zap className="h-4 w-4 stroke-[1.75]" />
+          </div>
+          <div className="text-left font-mono text-xs">
+            <span className="block text-[10px] text-slate-500 dark:text-gray-4 uppercase">AVERAGE LATENCY</span>
+            <span className="font-bold text-emerald-500">42ms <span className="text-[10px] text-slate-400 font-normal">(SUB-SECOND)</span></span>
+          </div>
+        </motion.div>
+
         {/* Colosseum Style Top Centered Status Pill */}
         <motion.div
           initial={{ opacity: 0, y: 15, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-8 inline-flex items-center gap-3 rounded-full border border-black/10 dark:border-white/10 bg-black/[0.04] dark:bg-white/[0.04] px-4 py-1.5 backdrop-blur-md shadow-sm dark:shadow-lg"
+          className="mb-8 inline-flex items-center gap-3 rounded-full border border-black/10 dark:border-white/10 bg-white/80 dark:bg-white/[0.04] px-4 py-1.5 backdrop-blur-md shadow-sm dark:shadow-[0_0_24px_rgba(0,216,246,0.12)]"
         >
           <span className="flex items-center gap-1.5 font-mono text-[11px] font-semibold text-slate-900 dark:text-white">
             <span className="h-1.5 w-1.5 rounded-full bg-[#00D8F6] animate-pulse" />
@@ -41,7 +71,7 @@ export function Hero() {
           </span>
         </motion.div>
 
-        {/* Kinetic Word Reveal Headline */}
+        {/* Kinetic Word Reveal Headline with Electric Cyan Text Gradient Accent */}
         <div className="mb-4">
           <MaskTextReveal
             text="PREDICT THE NEXT MOVE"
@@ -54,7 +84,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="font-mono mb-4 text-xs font-semibold tracking-[0.25em] text-slate-600 dark:text-gray-4 uppercase sm:text-sm"
+          className="font-mono mb-4 text-xs font-semibold tracking-[0.25em] text-[#00D8F6] uppercase sm:text-sm"
         >
           THE PROVING GROUND FOR PREDICTION TRADERS
         </motion.p>
