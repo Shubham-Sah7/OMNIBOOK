@@ -76,10 +76,10 @@ export function Hero() {
           </span>
         </motion.div>
 
-        {/* Kinetic Word Reveal Headline with Parallax Scroll Movement */}
+        {/* Kinetic Word Reveal Headline matching Colosseum "ENTER THE ARENA" */}
         <motion.div style={{ y: headlineY }} className="mb-4">
           <MaskTextReveal
-            text="PREDICT THE NEXT MOVE"
+            text="ENTER THE ARENA"
             className="font-display justify-center text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white uppercase sm:text-7xl md:text-8xl lg:text-[6.25rem] lg:leading-[6.5rem]"
           />
         </motion.div>
@@ -101,7 +101,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="mx-auto mb-6 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-gray-3 md:text-lg"
         >
-          Trade real-world events across crypto, politics, sports, AI, and global news with live prediction markets. Select outcomes, place positions before the round closes, and collect payouts upon instant settlement.
+          Omnibook is the premier prediction market arena where top traders forecast real-world events in 60-second rounds. Select outcomes, place positions before the round closes, and collect payouts upon instant settlement.
         </motion.p>
 
         {/* Centered Action Buttons */}
