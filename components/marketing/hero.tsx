@@ -9,7 +9,7 @@ import { MovingAbstractBackground } from "./moving-abstract-bg"
 
 export function Hero() {
   return (
-    <section className="bg-grid-arena relative px-4 pt-10 pb-12 text-center md:px-6 md:pt-14 md:pb-16 overflow-hidden">
+    <section className="bg-grid-arena relative px-4 pt-16 pb-12 text-center md:px-6 md:pt-24 md:pb-16 overflow-hidden">
       {/* Moving Abstract Ambient Background Animation */}
       <MovingAbstractBackground />
 
@@ -19,7 +19,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 15, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-6 inline-flex items-center gap-3 rounded-full border border-black/10 dark:border-white/10 bg-black/[0.04] dark:bg-white/[0.04] px-4 py-1.5 backdrop-blur-md shadow-sm dark:shadow-lg"
+          className="mb-8 inline-flex items-center gap-3 rounded-full border border-black/10 dark:border-white/10 bg-black/[0.04] dark:bg-white/[0.04] px-4 py-1.5 backdrop-blur-md shadow-sm dark:shadow-lg"
         >
           <span className="flex items-center gap-1.5 font-mono text-[11px] font-semibold text-slate-900 dark:text-white">
             <span className="h-1.5 w-1.5 rounded-full bg-[#00D8F6] animate-pulse" />

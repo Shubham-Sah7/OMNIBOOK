@@ -32,7 +32,7 @@ export function Header() {
   }, [])
 
   return (
-    <header className="sticky top-4 z-40 mx-auto max-w-5xl px-4 sm:px-6">
+    <header className="sticky top-4 z-40 mx-auto max-w-5xl px-4 mb-6 sm:px-6 md:mb-8">
       <motion.nav
         initial={{ y: -25, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
