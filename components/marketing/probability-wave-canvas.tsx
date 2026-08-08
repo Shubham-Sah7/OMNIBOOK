@@ -2,15 +2,6 @@
 
 import { useEffect, useRef } from "react"
 
-type DataTag = {
-  x: number
-  y: number
-  text: string
-  color: string
-  alpha: number
-  speed: number
-}
-
 export function ProbabilityWaveCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -33,7 +24,7 @@ export function ProbabilityWaveCanvas() {
     window.addEventListener("resize", handleResize)
 
     // Interactive Mouse Tracking
-    const mouse = { x: -1000, y: -1000, radius: 200 }
+    const mouse = { x: -1000, y: -1000, radius: 220 }
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect()
@@ -49,67 +40,64 @@ export function ProbabilityWaveCanvas() {
     window.addEventListener("mousemove", handleMouseMove)
     window.addEventListener("mouseleave", handleMouseLeave)
 
-    // Floating Financial Annotation Tags
-    const tagLabels = [
-      { text: "YES 62%", color: "#00D8F6" },
-      { text: "BTC +2.4%", color: "#10B981" },
-      { text: "SETTLEMENT 42ms", color: "#F59E0B" },
-      { text: "NO 38%", color: "#E15252" },
-      { text: "NEW MARKET", color: "#3B82F6" },
-      { text: "EVENT RESOLVED", color: "#A855F7" },
-    ]
-
-    const tags: DataTag[] = []
-    for (let i = 0; i < 8; i++) {
-      const labelObj = tagLabels[i % tagLabels.length]
-      tags.push({
-        x: Math.random() * width,
-        y: Math.random() * (height * 0.6) + height * 0.2,
-        text: labelObj.text,
-        color: labelObj.color,
-        alpha: Math.random() * 0.5 + 0.3,
-        speed: Math.random() * 0.6 + 0.4,
-      })
-    }
-
     let offset = 0
     let time = 0
 
-    // Render 60 FPS Procedural Financial Graph Canvas
+    // Render 60 FPS Financial Prediction Terminal Graph Canvas
     const render = () => {
-      time += 0.012
-      offset += 0.8
+      time += 0.015
+      offset += 1.2
       ctx.clearRect(0, 0, width, height)
 
-      // 1. Draw Subtle Financial Grid Mesh & Level Markers
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.03)"
+      // 1. Draw Thin Horizontal Baseline & Grid Lines
+      const centerY = height * 0.52
+
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.06)"
       ctx.lineWidth = 1
+      ctx.setLineDash([])
 
-      // Horizontal Probability Level Lines (20%, 40%, 60%, 80%)
-      const levelLabels = ["80%", "60%", "40%", "20%"]
-      for (let i = 1; i <= 4; i++) {
-        const levelY = (height / 5) * i
+      // Center Horizontal Baseline
+      ctx.beginPath()
+      ctx.moveTo(0, centerY)
+      ctx.lineTo(width, centerY)
+      ctx.stroke()
+
+      // Top & Bottom Quarter Level Lines
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.03)"
+      ctx.beginPath()
+      ctx.moveTo(0, height * 0.25)
+      ctx.lineTo(width, height * 0.25)
+      ctx.moveTo(0, height * 0.75)
+      ctx.lineTo(width, height * 0.75)
+      ctx.stroke()
+
+      // 2. Draw Vertical Dashed Market Event Markers (matching reference image)
+      const eventSpacing = 320
+      const eventOffset = offset % eventSpacing
+      const eventLabels = ["new market", "event occurred", "new market", "settlement confirmed"]
+
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.18)"
+      ctx.lineWidth = 1
+      ctx.setLineDash([4, 4])
+
+      let labelIdx = 0
+      for (let x = width - eventOffset; x > -100; x -= eventSpacing) {
         ctx.beginPath()
-        ctx.moveTo(0, levelY)
-        ctx.lineTo(width, levelY)
+        ctx.moveTo(x, height * 0.1)
+        ctx.lineTo(x, height * 0.85)
         ctx.stroke()
 
-        ctx.fillStyle = "rgba(255, 255, 255, 0.15)"
-        ctx.font = "10px Inter, sans-serif"
-        ctx.fillText(levelLabels[i - 1], 12, levelY - 4)
+        // Bottom Event Label Text
+        const text = eventLabels[labelIdx % eventLabels.length]
+        ctx.fillStyle = "rgba(255, 255, 255, 0.4)"
+        ctx.font = "11px Inter, monospace, sans-serif"
+        ctx.fillText(text, x + 8, height * 0.84)
+        labelIdx++
       }
 
-      // Vertical Time Markers
-      const gridSpacing = 120
-      const gridOffset = offset % gridSpacing
-      for (let x = width - gridOffset; x > 0; x -= gridSpacing) {
-        ctx.beginPath()
-        ctx.moveTo(x, 0)
-        ctx.lineTo(x, height)
-        ctx.stroke()
-      }
+      ctx.setLineDash([]) // Reset line dash
 
-      // Mouse Parallax Glow Brightness
+      // Mouse Parallax Glow Brightness Aura
       if (mouse.x > 0) {
         const glowGradient = ctx.createRadialGradient(mouse.x, mouse.y, 10, mouse.x, mouse.y, mouse.radius)
         glowGradient.addColorStop(0, "rgba(0, 216, 246, 0.12)")
@@ -120,92 +108,60 @@ export function ProbabilityWaveCanvas() {
         ctx.fill()
       }
 
-      // 2. Procedural Smooth Financial Curves Functions
-      const step = 4
+      // 3. Realistic High-Frequency Financial Probability Curves
+      const step = 3
 
-      // A. White Curve = Market Average Index
+      // A. White Curve = Benchmark Market Index (Smooth Financial Spline)
       ctx.beginPath()
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.45)"
+      ctx.strokeStyle = "rgba(235, 238, 242, 0.65)"
       ctx.lineWidth = 1.8
       for (let x = 0; x <= width + step; x += step) {
         const worldX = x + offset
-        const y =
-          height * 0.48 +
-          Math.sin(worldX * 0.003 + time) * 45 +
-          Math.cos(worldX * 0.008 + time * 0.7) * 25
+        // Financial wave equation combining macro trends + micro jagged noise
+        const macro = Math.sin(worldX * 0.0035 + time * 0.8) * 65
+        const micro = Math.cos(worldX * 0.02 + time * 2) * 6 + Math.sin(worldX * 0.08) * 3
+        const y = centerY + macro + micro
+
         if (x === 0) ctx.moveTo(x, y)
         else ctx.lineTo(x, y)
       }
       ctx.stroke()
 
-      // B. Cyan Curve = Bullish / YES Odds (#00D8F6)
+      // B. Green/Cyan Curve = Bullish / YES Prediction Trajectory (#10B981 / #00D8F6)
       ctx.beginPath()
-      ctx.strokeStyle = "rgba(0, 216, 246, 0.85)"
-      ctx.lineWidth = 2.4
-      ctx.shadowBlur = 12
-      ctx.shadowColor = "#00D8F6"
-      for (let x = 0; x <= width + step; x += step) {
-        const worldX = x + offset
-        const y =
-          height * 0.4 +
-          Math.sin(worldX * 0.004 + time * 1.2) * 55 +
-          Math.sin(worldX * 0.009 + time) * 35
-        if (x === 0) ctx.moveTo(x, y)
-        else ctx.lineTo(x, y)
-      }
-      ctx.stroke()
-      ctx.shadowBlur = 0
-
-      // C. Red Curve = Bearish / NO Odds (#E15252)
-      ctx.beginPath()
-      ctx.strokeStyle = "rgba(225, 82, 82, 0.75)"
-      ctx.lineWidth = 2.0
+      ctx.strokeStyle = "#10B981"
+      ctx.lineWidth = 2.2
       ctx.shadowBlur = 10
-      ctx.shadowColor = "#E15252"
+      ctx.shadowColor = "rgba(16, 185, 129, 0.5)"
       for (let x = 0; x <= width + step; x += step) {
         const worldX = x + offset
-        const y =
-          height * 0.58 +
-          Math.cos(worldX * 0.0035 + time * 0.9) * 50 +
-          Math.sin(worldX * 0.007 + time * 1.1) * 30
+        const macro = Math.sin(worldX * 0.004 + time * 1.1) * 75 + Math.cos(worldX * 0.009 + time) * 35
+        const micro = Math.sin(worldX * 0.035 + time * 2.5) * 8 + Math.cos(worldX * 0.07) * 4
+        const y = centerY - 20 + macro + micro
+
         if (x === 0) ctx.moveTo(x, y)
         else ctx.lineTo(x, y)
       }
       ctx.stroke()
       ctx.shadowBlur = 0
 
-      // 3. Render Drifting Financial Annotation Tags
-      for (let i = 0; i < tags.length; i++) {
-        const tag = tags[i]
-        tag.x -= tag.speed
+      // C. Red Curve = Bearish / NO Prediction Trajectory (#E15252)
+      ctx.beginPath()
+      ctx.strokeStyle = "#E15252"
+      ctx.lineWidth = 2.0
+      ctx.shadowBlur = 8
+      ctx.shadowColor = "rgba(225, 82, 82, 0.4)"
+      for (let x = 0; x <= width + step; x += step) {
+        const worldX = x + offset
+        const macro = Math.cos(worldX * 0.0038 + time * 0.95) * 70 - Math.sin(worldX * 0.008 + time * 1.2) * 40
+        const micro = Math.cos(worldX * 0.04 + time * 2.2) * 7 + Math.sin(worldX * 0.09) * 3.5
+        const y = centerY + 25 + macro + micro
 
-        if (tag.x < -120) {
-          tag.x = width + 50
-          tag.y = Math.random() * (height * 0.6) + height * 0.2
-        }
-
-        ctx.save()
-        ctx.fillStyle = "rgba(10, 10, 14, 0.75)"
-        ctx.strokeStyle = tag.color
-        ctx.lineWidth = 1
-        ctx.globalAlpha = tag.alpha
-
-        const paddingX = 8
-        const paddingY = 4
-        ctx.font = "10px Inter, sans-serif"
-        const textWidth = ctx.measureText(tag.text).width
-
-        // Draw Pill Tag Background
-        ctx.beginPath()
-        ctx.roundRect(tag.x - paddingX, tag.y - 12, textWidth + paddingX * 2, 20, 6)
-        ctx.fill()
-        ctx.stroke()
-
-        // Draw Tag Text
-        ctx.fillStyle = tag.color
-        ctx.fillText(tag.text, tag.x, tag.y + 2)
-        ctx.restore()
+        if (x === 0) ctx.moveTo(x, y)
+        else ctx.lineTo(x, y)
       }
+      ctx.stroke()
+      ctx.shadowBlur = 0
 
       animationFrameId = requestAnimationFrame(render)
     }
