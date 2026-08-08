@@ -2,11 +2,10 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X, Wallet, Sparkles, Grid, ArrowLeftRight } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { motion } from "framer-motion"
 import { Logo } from "./logo"
 import { ThemeToggle } from "./theme-toggle"
-import { useBgMode } from "./bg-mode-context"
 
 const NAV_LINKS = [
   { label: "Markets", href: "#markets" },
@@ -19,7 +18,6 @@ const NAV_LINKS = [
 export function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const { bgMode, toggleBgMode } = useBgMode()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,41 +62,10 @@ export function Header() {
           ))}
         </ul>
 
-        {/* Right: Background Nudge Switcher, Theme Switcher, Balance & CTA */}
+        {/* Right: Theme Switcher & Start Trading CTA */}
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-          {/* Background Style Nudge Switcher (Trading / Cosmos / Grid) */}
-          <button
-            type="button"
-            onClick={toggleBgMode}
-            className="flex items-center gap-1.5 rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-3 py-1 text-[11px] font-mono font-semibold text-slate-800 dark:text-white transition-all hover:bg-black/10 dark:hover:bg-white/10 hover:scale-[1.03]"
-            title="Switch Background Visual (Trading / Cosmos / Grid)"
-          >
-            {bgMode === "trading" ? (
-              <>
-                <ArrowLeftRight className="h-3.5 w-3.5 stroke-[1.75] text-[#00D8F6] animate-pulse" />
-                <span className="hidden sm:inline">TRADING</span>
-              </>
-            ) : bgMode === "cosmos" ? (
-              <>
-                <Sparkles className="h-3.5 w-3.5 stroke-[1.75] text-[#00D8F6]" />
-                <span className="hidden sm:inline">COSMOS</span>
-              </>
-            ) : (
-              <>
-                <Grid className="h-3.5 w-3.5 stroke-[1.75] text-slate-600 dark:text-gray-3" />
-                <span className="hidden sm:inline">GRID</span>
-              </>
-            )}
-          </button>
-
           {/* Light / Dark Mode Toggle Button */}
           <ThemeToggle />
-
-          {/* User Balance Indicator */}
-          <div className="hidden items-center gap-2 rounded-full border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.03] dark:bg-white/[0.03] px-3 py-1.5 font-mono text-xs font-medium text-slate-800 dark:text-gray-2 sm:flex">
-            <Wallet className="h-3.5 w-3.5 stroke-[1.75] text-slate-500 dark:text-gray-4" />
-            <span>$90.42</span>
-          </div>
 
           <Link href="#markets" className="btn-primary rounded-full px-5 whitespace-nowrap hover:scale-[1.03]">
             Start Trading
