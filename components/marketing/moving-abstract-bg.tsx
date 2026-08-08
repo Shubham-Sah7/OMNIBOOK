@@ -8,7 +8,7 @@ export function MovingAbstractBackground() {
   const { bgMode } = useBgMode()
 
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden select-none">
+    <div className="pointer-events-none absolute inset-0 overflow-hidden select-none z-0">
       <AnimatePresence mode="wait">
         {bgMode === "cosmos" ? (
           <motion.div
@@ -16,8 +16,8 @@ export function MovingAbstractBackground() {
             initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="absolute inset-0"
+            transition={{ duration: 0.7, ease: "easeInOut" }}
+            className="absolute inset-0 z-0"
           >
             {/* Cinematic Space Earth Orbit Image */}
             <div className="absolute inset-0 z-0">
@@ -26,26 +26,25 @@ export function MovingAbstractBackground() {
                 alt="Cosmic Space Orbit Earth View"
                 fill
                 priority
-                className="object-cover object-center opacity-85 dark:opacity-90"
+                className="object-cover object-center opacity-90 dark:opacity-95"
               />
             </div>
 
-            {/* Dark Radial Vignette & Atmospheric Glow Overlay */}
-            <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-[#0a0a0a]/80" />
-            <div className="absolute inset-0 z-10 bg-radial from-transparent via-[#0a0a0a]/40 to-[#0a0a0a]" />
+            {/* Subtle Gradient Overlays for Contrast & Readability */}
+            <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#0a0a0a]/60 via-transparent to-[#0a0a0a]/90 dark:from-[#0a0a0a]/70 dark:via-transparent dark:to-[#0a0a0a]" />
 
-            {/* Ambient Animated Cosmic Blue Aura Light */}
+            {/* Ambient Cosmic Cyan Glow */}
             <motion.div
               animate={{
-                scale: [1, 1.15, 1],
-                opacity: [0.2, 0.35, 0.2],
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.5, 0.3],
               }}
               transition={{
-                duration: 12,
+                duration: 10,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="absolute top-1/3 right-1/4 z-10 h-[500px] w-[500px] rounded-full bg-[#00D8F6]/20 blur-[150px]"
+              className="absolute top-1/4 right-1/3 z-10 h-[500px] w-[500px] rounded-full bg-[#00D8F6]/25 blur-[130px]"
             />
           </motion.div>
         ) : (
@@ -54,8 +53,8 @@ export function MovingAbstractBackground() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="absolute inset-0"
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="absolute inset-0 z-0"
           >
             {/* Ambient Moving Cyan Light Orb */}
             <motion.div

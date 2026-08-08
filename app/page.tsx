@@ -1,3 +1,5 @@
+"use client"
+
 import { TopBanner } from "@/components/marketing/top-banner"
 import { Header } from "@/components/marketing/header"
 import { Hero } from "@/components/marketing/hero"
