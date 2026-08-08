@@ -21,23 +21,26 @@ export default function Page() {
     <SmoothScrollProvider>
       <BgModeProvider>
         <div className="relative min-h-screen bg-[#fbfbfd] dark:bg-[#0a0a0a] bg-grid-full text-slate-900 dark:text-white selection:bg-[#00D8F6] selection:text-black transition-colors duration-300">
-          <div className="mx-auto max-w-[90rem]">
+          {/* Full-Bleed 100% Width Top Section (Header + Hero Background) */}
+          <div className="relative w-full">
             <Header />
-
             <main>
               <Hero />
-              <Stats />
-              <BuiltForMarkets />
-              <TrendingMarkets />
-              <HowItWorks />
-              <WhyOmnibook />
-              <CategoriesGrid />
-              <Leaderboard />
-              <TransparencySection />
-              <TestimonialsStory />
-              <CallToAction />
             </main>
+          </div>
 
+          {/* Centered Main Content Sections */}
+          <div className="mx-auto max-w-[90rem]">
+            <Stats />
+            <BuiltForMarkets />
+            <TrendingMarkets />
+            <HowItWorks />
+            <WhyOmnibook />
+            <CategoriesGrid />
+            <Leaderboard />
+            <TransparencySection />
+            <TestimonialsStory />
+            <CallToAction />
             <Footer />
           </div>
         </div>
