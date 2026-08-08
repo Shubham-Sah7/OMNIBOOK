@@ -34,29 +34,29 @@ export function Header() {
   }, [])
 
   return (
-    <header className="sticky top-4 z-40 mx-auto max-w-5xl px-4 mb-6 sm:px-6 md:mb-8">
+    <header className="sticky top-4 z-40 mx-auto max-w-6xl px-4 mb-6 sm:px-6 md:mb-8">
       <motion.nav
         initial={{ y: -25, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`relative flex items-center justify-between rounded-full border transition-all duration-300 ${
           scrolled
-            ? "border-black/[0.14] dark:border-white/[0.16] bg-white/90 dark:bg-[#0c0d10]/90 px-5 py-2.5 backdrop-blur-xl shadow-lg dark:shadow-[0_12px_40px_rgba(0,0,0,0.8)] text-slate-900 dark:text-white"
-            : "border-black/[0.10] dark:border-white/[0.10] bg-white/70 dark:bg-[#0c0d10]/70 px-5 py-2.5 backdrop-blur-lg shadow-md dark:shadow-lg text-slate-900 dark:text-white"
+            ? "border-black/[0.14] dark:border-white/[0.16] bg-white/90 dark:bg-[#0c0d10]/90 px-6 py-2.5 backdrop-blur-xl shadow-lg dark:shadow-[0_12px_40px_rgba(0,0,0,0.8)] text-slate-900 dark:text-white"
+            : "border-black/[0.10] dark:border-white/[0.10] bg-white/80 dark:bg-[#0c0d10]/70 px-6 py-2.5 backdrop-blur-lg shadow-md dark:shadow-lg text-slate-900 dark:text-white"
         }`}
       >
         {/* Left: Brand Logo */}
-        <Link href="/" className="flex items-center gap-2 text-slate-900 dark:text-white">
+        <Link href="/" className="flex shrink-0 items-center gap-2 text-slate-900 dark:text-white">
           <Logo />
         </Link>
 
-        {/* Center: Navigation Links */}
-        <ul className="hidden items-center gap-6 lg:flex">
+        {/* Center: Navigation Links (No wrapping) */}
+        <ul className="hidden items-center gap-5 xl:gap-7 lg:flex">
           {NAV_LINKS.map((link) => (
-            <li key={link.href}>
+            <li key={link.href} className="shrink-0">
               <Link
                 href={link.href}
-                className="text-xs font-medium text-slate-600 dark:text-gray-3 transition-colors duration-200 hover:text-slate-900 dark:hover:text-white"
+                className="whitespace-nowrap text-xs font-medium text-slate-700 dark:text-gray-3 transition-colors duration-200 hover:text-slate-900 dark:hover:text-white"
               >
                 {link.label}
               </Link>
@@ -65,7 +65,7 @@ export function Header() {
         </ul>
 
         {/* Right: Background Nudge Switcher, Theme Switcher, Balance & CTA */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           {/* Background Style Nudge Switcher (Grid / Space Orbit) */}
           <button
             type="button"
@@ -95,7 +95,7 @@ export function Header() {
             <span>$90.42</span>
           </div>
 
-          <Link href="#markets" className="btn-primary rounded-full px-5">
+          <Link href="#markets" className="btn-primary rounded-full px-5 whitespace-nowrap">
             Start Trading
           </Link>
 
