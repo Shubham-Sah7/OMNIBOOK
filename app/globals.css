@@ -63,6 +63,63 @@
   }
 }
 
+/* Colosseum Digital Glitch Number Animation */
+.glitch-active {
+  position: relative;
+  text-shadow: -2px 0 #00D8F6, 2px 0 #E15252;
+  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.glitch-active::before,
+.glitch-active::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.glitch-active::before {
+  color: #00D8F6;
+  animation: glitch-anim 0.3s infinite linear alternate-reverse;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+.glitch-active::after {
+  color: #E15252;
+  animation: glitch-anim-2 0.3s infinite linear alternate-reverse;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch-skew {
+  0% { transform: skew(0deg); }
+  20% { transform: skew(-3deg); }
+  40% { transform: skew(2deg); }
+  60% { transform: skew(-1deg); }
+  80% { transform: skew(3deg); }
+  100% { transform: skew(0deg); }
+}
+
+@keyframes glitch-anim {
+  0% { transform: translate(0); }
+  20% { transform: translate(-3px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(3px, 1px); }
+  80% { transform: translate(1px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { transform: translate(0); }
+  20% { transform: translate(3px, -2px); }
+  40% { transform: translate(2px, 2px); }
+  60% { transform: translate(-3px, -1px); }
+  80% { transform: translate(-1px, 2px); }
+  100% { transform: translate(0); }
+}
+
 /* Ticker Marquee Animation */
 @keyframes marquee {
   0% { transform: translateX(0%); }
@@ -77,7 +134,7 @@
   animation-play-state: paused;
 }
 
-/* Subtle continuous background grid lines (Linear / Vercel style) */
+/* Subtle continuous background grid lines */
 .bg-grid-full {
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
@@ -89,39 +146,6 @@
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-}
-
-.bg-grid-arena {
-  position: relative;
-}
-
-.bg-grid-arena::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image:
-    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(0, 216, 246, 0.08), transparent 70%),
-    linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
-  background-size:
-    100% 100%,
-    48px 48px,
-    48px 48px;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 10%, black 40%, transparent 95%);
-}
-
-.dark .bg-grid-arena::before {
-  background-image:
-    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(0, 216, 246, 0.08), transparent 70%),
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-}
-
-.bg-grid-arena > * {
-  position: relative;
-  z-index: 1;
 }
 
 /* Pure Handcrafted Pill Badge Specification */
@@ -151,7 +175,7 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
-/* Linear 44px Button Specification */
+/* Linear Button Specification */
 .btn-primary {
   display: inline-flex;
   align-items: center;
