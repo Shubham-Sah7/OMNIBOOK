@@ -15,7 +15,6 @@ import { CallToAction } from "@/components/marketing/cta"
 import { Footer } from "@/components/marketing/footer"
 import { SmoothScrollProvider } from "@/components/marketing/smooth-scroll"
 import { BgModeProvider } from "@/components/marketing/bg-mode-context"
-import { LiveTransactionFeed } from "@/components/marketing/live-transaction-feed"
 
 export default function Page() {
   return (
@@ -41,9 +40,6 @@ export default function Page() {
 
             <Footer />
           </div>
-
-          {/* Living Terminal Real-time Floating Trade Feed */}
-          <LiveTransactionFeed />
         </div>
       </BgModeProvider>
     </SmoothScrollProvider>
