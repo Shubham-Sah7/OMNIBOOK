@@ -17,7 +17,7 @@ import { SmoothScrollProvider } from "@/components/marketing/smooth-scroll"
 export default function Page() {
   return (
     <SmoothScrollProvider>
-      <div className="relative min-h-screen bg-[#0a0a0a] bg-grid-full text-white selection:bg-[#00D8F6] selection:text-black">
+      <div className="relative min-h-screen bg-[#fbfbfd] dark:bg-[#0a0a0a] bg-grid-full text-slate-900 dark:text-white selection:bg-[#00D8F6] selection:text-black transition-colors duration-300">
         <TopBanner />
         <div className="mx-auto max-w-[90rem]">
           <Header />

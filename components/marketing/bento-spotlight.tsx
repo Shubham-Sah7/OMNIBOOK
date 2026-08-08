@@ -29,14 +29,14 @@ export function BentoCard({ children, className = "" }: BentoCardProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
-      className={`relative overflow-hidden rounded-2xl border border-white/[0.08] bg-[#111111] transition-colors duration-300 hover:border-white/[0.18] ${className}`}
+      className={`relative overflow-hidden rounded-2xl border border-black/[0.08] dark:border-white/[0.08] bg-white dark:bg-[#111111] shadow-sm dark:shadow-none transition-all duration-300 hover:border-black/[0.18] dark:hover:border-white/[0.18] ${className}`}
     >
       {/* Handcrafted Mouse Spotlight Effect */}
       {isHovered && (
         <div
           className="pointer-events-none absolute -inset-px z-10 transition-opacity duration-300"
           style={{
-            background: `radial-gradient(450px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 255, 255, 0.08), transparent 80%)`,
+            background: `radial-gradient(450px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 0, 0, 0.04), transparent 80%)`,
           }}
         />
       )}

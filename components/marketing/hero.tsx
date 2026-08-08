@@ -19,32 +19,32 @@ export function Hero() {
           initial={{ opacity: 0, y: 15, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 backdrop-blur-md shadow-lg"
+          className="mb-6 inline-flex items-center gap-3 rounded-full border border-black/10 dark:border-white/10 bg-black/[0.04] dark:bg-white/[0.04] px-4 py-1.5 backdrop-blur-md shadow-sm dark:shadow-lg"
         >
-          <span className="flex items-center gap-1.5 font-mono text-[11px] font-semibold text-white">
+          <span className="flex items-center gap-1.5 font-mono text-[11px] font-semibold text-slate-900 dark:text-white">
             <span className="h-1.5 w-1.5 rounded-full bg-[#00D8F6] animate-pulse" />
             SEASON 1 LIVE
           </span>
 
-          <span className="h-3 w-[1px] bg-white/20" />
+          <span className="h-3 w-[1px] bg-black/20 dark:bg-white/20" />
 
-          <span className="font-mono text-[11px] font-medium text-gray-3">
+          <span className="font-mono text-[11px] font-medium text-slate-600 dark:text-gray-3">
             60s ROUNDS
           </span>
 
-          <span className="h-3 w-[1px] bg-white/20" />
+          <span className="h-3 w-[1px] bg-black/20 dark:bg-white/20" />
 
-          <span className="flex items-center gap-1 font-mono text-[11px] font-semibold text-white">
+          <span className="flex items-center gap-1 font-mono text-[11px] font-semibold text-slate-900 dark:text-white">
             15K+ TRADERS
-            <ChevronRight className="h-3 w-3 text-gray-4" />
+            <ChevronRight className="h-3 w-3 text-slate-500 dark:text-gray-4" />
           </span>
         </motion.div>
 
-        {/* Kinetic Word Reveal Headline in Pure White TASA Orbiter Display */}
+        {/* Kinetic Word Reveal Headline */}
         <div className="mb-4">
           <MaskTextReveal
             text="PREDICT THE NEXT MOVE"
-            className="font-display justify-center text-5xl font-extrabold tracking-tight text-white uppercase sm:text-7xl md:text-8xl lg:text-[6.25rem] lg:leading-[6.5rem]"
+            className="font-display justify-center text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white uppercase sm:text-7xl md:text-8xl lg:text-[6.25rem] lg:leading-[6.5rem]"
           />
         </div>
 
@@ -53,7 +53,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="font-mono mb-4 text-xs font-semibold tracking-[0.25em] text-gray-4 uppercase sm:text-sm"
+          className="font-mono mb-4 text-xs font-semibold tracking-[0.25em] text-slate-600 dark:text-gray-4 uppercase sm:text-sm"
         >
           THE PROVING GROUND FOR PREDICTION TRADERS
         </motion.p>
@@ -63,7 +63,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto mb-6 max-w-2xl text-base leading-relaxed text-gray-3 md:text-lg"
+          className="mx-auto mb-6 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-gray-3 md:text-lg"
         >
           Trade real-world events across crypto, politics, sports, AI, and global news with live prediction markets. Select outcomes, place positions before the round closes, and collect payouts upon instant settlement.
         </motion.p>
@@ -79,7 +79,7 @@ export function Hero() {
             Start Trading <ArrowRight className="h-4 w-4" />
           </Link>
           <Link href="#markets" className="btn-secondary">
-            Explore Markets <TrendingUp className="h-4 w-4 text-gray-4" />
+            Explore Markets <TrendingUp className="h-4 w-4 text-slate-500 dark:text-gray-4" />
           </Link>
         </motion.div>
 

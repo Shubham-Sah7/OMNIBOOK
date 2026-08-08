@@ -34,9 +34,9 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-white/[0.08] bg-[#070707]">
+    <footer className="relative overflow-hidden border-t border-black/[0.08] dark:border-white/[0.08] bg-slate-50 dark:bg-[#070707]">
       {/* Background Footer Architectural Vector Graphic */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 mx-auto max-w-6xl opacity-10 mix-blend-screen select-none">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 mx-auto max-w-6xl opacity-5 dark:opacity-10 mix-blend-multiply dark:mix-blend-screen select-none">
         <Image
           src="/images/footer_skyline.png"
           alt="Architectural Skyline Graphic"
@@ -46,26 +46,26 @@ export function Footer() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-start justify-between gap-10 px-6 py-16 text-xs font-normal text-gray-4 md:flex-row md:gap-0">
+      <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-start justify-between gap-10 px-6 py-16 text-xs font-normal text-slate-500 dark:text-gray-4 md:flex-row md:gap-0">
         <div>
           <div className="mb-6">
-            <Link href="/" className="mb-3 inline-block text-white">
+            <Link href="/" className="mb-3 inline-block text-slate-900 dark:text-white">
               <Logo />
             </Link>
-            <p className="mt-2 text-xs text-gray-4">© 2026 Omnibook Inc. All rights reserved.</p>
+            <p className="mt-2 text-xs text-slate-500 dark:text-gray-4">© 2026 Omnibook Inc. All rights reserved.</p>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-3 md:gap-x-16 md:gap-y-0">
           {COLUMNS.map((column) => (
             <div key={column.title}>
-              <h3 className="mb-4 font-mono text-[11px] font-medium tracking-wider text-gray-3 uppercase">{column.title}</h3>
+              <h3 className="mb-4 font-mono text-[11px] font-medium tracking-wider text-slate-700 dark:text-gray-3 uppercase">{column.title}</h3>
               <ul className="grid gap-2.5 text-xs">
                 {column.links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-gray-4 transition-colors duration-200 hover:text-white"
+                      className="text-slate-500 dark:text-gray-4 transition-colors duration-200 hover:text-slate-900 dark:hover:text-white"
                     >
                       {link.label}
                     </Link>
@@ -77,7 +77,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="relative z-10 border-t border-white/[0.06] bg-[#050505] px-6 py-4 text-center text-[10px] text-gray-4">
+      <div className="relative z-10 border-t border-black/[0.06] dark:border-white/[0.06] bg-slate-100 dark:bg-[#050505] px-6 py-4 text-center text-[10px] text-slate-500 dark:text-gray-4">
         <p className="mx-auto max-w-3xl leading-relaxed">
           Trading on prediction markets involves risk. Event derivative contracts are options contracts based on real-world events.
         </p>

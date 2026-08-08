@@ -33,22 +33,22 @@ export function Leaderboard() {
           <div className="linear-badge mb-3">
             SEASON 1 STANDINGS
           </div>
-          <h2 className="mx-auto max-w-3xl text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
+          <h2 className="mx-auto max-w-3xl text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl md:text-5xl">
             Trusted by the best prediction traders
           </h2>
-          <p className="mt-3 mx-auto max-w-xl text-base leading-relaxed text-gray-3">
+          <p className="mt-3 mx-auto max-w-xl text-base leading-relaxed text-slate-600 dark:text-gray-3">
             Watch top traders climb the rankings in real time.
           </p>
         </AnimatedSection>
 
         {/* Leaderboard Component */}
-        <AnimatedSection delay={0.15} className="overflow-hidden rounded-xl border border-white/[0.08] bg-[#111111] p-6 shadow-lg">
-          <div className="mb-5 flex items-center justify-between border-b border-white/[0.06] pb-4">
+        <AnimatedSection delay={0.15} className="overflow-hidden rounded-xl border border-black/[0.08] dark:border-white/[0.08] bg-white dark:bg-[#111111] p-6 shadow-sm dark:shadow-lg">
+          <div className="mb-5 flex items-center justify-between border-b border-black/[0.06] dark:border-white/[0.06] pb-4">
             <div className="flex items-center gap-2">
-              <Trophy className="h-4 w-4 stroke-[1.75] text-white" />
-              <span className="font-mono text-xs font-semibold text-white uppercase">Live Standings</span>
+              <Trophy className="h-4 w-4 stroke-[1.75] text-slate-900 dark:text-white" />
+              <span className="font-mono text-xs font-semibold text-slate-900 dark:text-white uppercase">Live Standings</span>
             </div>
-            <span className="font-mono text-xs text-gray-4">Updated every minute</span>
+            <span className="font-mono text-xs text-slate-500 dark:text-gray-4">Updated every minute</span>
           </div>
 
           <div className="space-y-2 font-mono text-xs">
@@ -59,11 +59,11 @@ export function Leaderboard() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                className="flex items-center justify-between rounded-lg border border-white/[0.04] bg-[#0c0c0c] px-4 py-2.5 transition-colors hover:border-white/[0.12]"
+                className="flex items-center justify-between rounded-lg border border-black/[0.04] dark:border-white/[0.04] bg-slate-50 dark:bg-[#0c0c0c] px-4 py-2.5 transition-colors hover:border-black/[0.12] dark:hover:border-white/[0.12]"
               >
                 <div className="flex items-center gap-3.5">
-                  <span className="w-5 text-center font-bold text-gray-4">{user.rank}</span>
-                  <div className="relative h-7 w-7 shrink-0 overflow-hidden rounded-full border border-white/10 bg-gray-9">
+                  <span className="w-5 text-center font-bold text-slate-400 dark:text-gray-4">{user.rank}</span>
+                  <div className="relative h-7 w-7 shrink-0 overflow-hidden rounded-full border border-black/10 dark:border-white/10 bg-slate-200 dark:bg-gray-9">
                     <Image
                       src={user.avatar}
                       alt={user.name}
@@ -72,9 +72,9 @@ export function Leaderboard() {
                       className="h-full w-full object-cover"
                     />
                   </div>
-                  <span className="font-medium text-gray-2">{user.name}</span>
+                  <span className="font-medium text-slate-800 dark:text-gray-2">{user.name}</span>
                 </div>
-                <span className="font-bold text-white">
+                <span className="font-bold text-slate-900 dark:text-white">
                   {user.profit}
                 </span>
               </motion.div>

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { ArrowUpRight, Clock } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-import { AnimatedSection } from "./animated-section"
+import { AnimatedSection, MaskTextReveal } from "./animated-section"
 
 type MarketItem = {
   id: string
@@ -41,10 +41,13 @@ export function TrendingMarkets() {
           <div className="linear-badge mb-3">
             LIVE ORDER BOOK
           </div>
-          <h2 className="mx-auto max-w-3xl text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
-            Trending Markets
-          </h2>
-          <p className="mt-3 mx-auto max-w-xl text-base leading-relaxed text-gray-3">
+          <div className="mx-auto max-w-3xl">
+            <MaskTextReveal
+              text="Trending Markets"
+              className="justify-center text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl md:text-5xl"
+            />
+          </div>
+          <p className="mt-3 mx-auto max-w-xl text-base leading-relaxed text-slate-600 dark:text-gray-3">
             Trade active live rounds or explore upcoming prediction contracts.
           </p>
         </AnimatedSection>
@@ -58,8 +61,8 @@ export function TrendingMarkets() {
               onClick={() => setSelectedCat(cat)}
               className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
                 selectedCat === cat
-                  ? "border border-white/20 bg-white/10 text-white shadow-sm"
-                  : "border border-transparent bg-white/[0.03] text-gray-4 hover:border-white/10 hover:text-white"
+                  ? "border border-slate-900/20 dark:border-white/20 bg-slate-900/10 dark:bg-white/10 text-slate-900 dark:text-white shadow-sm"
+                  : "border border-transparent bg-black/[0.03] dark:bg-white/[0.03] text-slate-600 dark:text-gray-4 hover:border-black/10 dark:hover:border-white/10 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
               {cat}
@@ -67,11 +70,11 @@ export function TrendingMarkets() {
           ))}
         </AnimatedSection>
 
-        {/* Minimal Table */}
-        <AnimatedSection delay={0.2} className="overflow-hidden rounded-xl border border-white/[0.08] bg-[#111111]">
+        {/* Table Container */}
+        <AnimatedSection delay={0.2} className="overflow-hidden rounded-xl border border-black/[0.08] dark:border-white/[0.08] bg-white dark:bg-[#111111] shadow-sm dark:shadow-none">
           <div className="overflow-x-auto">
-            <table className="w-full text-left font-mono text-xs text-gray-3">
-              <thead className="border-b border-white/[0.06] bg-[#0c0c0c] uppercase text-gray-4">
+            <table className="w-full text-left font-mono text-xs text-slate-700 dark:text-gray-3">
+              <thead className="border-b border-black/[0.06] dark:border-white/[0.06] bg-slate-50 dark:bg-[#0c0c0c] uppercase text-slate-500 dark:text-gray-4">
                 <tr>
                   <th className="px-6 py-3.5 font-semibold">MARKET</th>
                   <th className="px-6 py-3.5 font-semibold">CATEGORY</th>
@@ -81,7 +84,7 @@ export function TrendingMarkets() {
                   <th className="px-6 py-3.5 font-semibold text-center">ACTION</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/[0.04]">
+              <tbody className="divide-y divide-black/[0.04] dark:divide-white/[0.04]">
                 <AnimatePresence mode="wait">
                   {filtered.map((item, i) => (
                     <motion.tr
@@ -90,34 +93,34 @@ export function TrendingMarkets() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.3, delay: i * 0.04 }}
-                      className="transition-colors hover:bg-white/[0.02]"
+                      className="transition-colors hover:bg-black/[0.02] dark:hover:bg-white/[0.02]"
                     >
-                      <td className="px-6 py-3.5 font-medium text-white">
+                      <td className="px-6 py-3.5 font-medium text-slate-900 dark:text-white">
                         {item.name}
                       </td>
-                      <td className="px-6 py-3.5 text-gray-4">
-                        <span className="rounded bg-white/[0.04] px-2 py-0.5 text-[11px] text-gray-3">
+                      <td className="px-6 py-3.5 text-slate-500 dark:text-gray-4">
+                        <span className="rounded bg-black/[0.04] dark:bg-white/[0.04] px-2 py-0.5 text-[11px] text-slate-700 dark:text-gray-3">
                           {item.category}
                         </span>
                       </td>
                       <td className="px-6 py-3.5">
                         {item.status === "Live" ? (
-                          <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-white">
+                          <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-900/10 dark:bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-slate-900 dark:text-white">
                             <span className="h-1.5 w-1.5 rounded-full bg-[#00D8F6]" />
                             Live
                           </span>
                         ) : (
-                          <span className="rounded-full bg-white/[0.04] px-2.5 py-0.5 text-[11px] font-medium text-gray-4">
+                          <span className="rounded-full bg-black/[0.04] dark:bg-white/[0.04] px-2.5 py-0.5 text-[11px] font-medium text-slate-500 dark:text-gray-4">
                             Coming Soon
                           </span>
                         )}
                       </td>
-                      <td className="px-6 py-3.5 text-right font-bold text-white">
+                      <td className="px-6 py-3.5 text-right font-bold text-slate-900 dark:text-white">
                         {item.probability}
                       </td>
-                      <td className="px-6 py-3.5 text-right text-gray-4">
+                      <td className="px-6 py-3.5 text-right text-slate-500 dark:text-gray-4">
                         <span className="inline-flex items-center gap-1">
-                          <Clock className="h-3 w-3 text-gray-4" />
+                          <Clock className="h-3 w-3 text-slate-400 dark:text-gray-4" />
                           {item.timeRemaining}
                         </span>
                       </td>

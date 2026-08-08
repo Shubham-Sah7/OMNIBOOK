@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Menu, X, Wallet } from "lucide-react"
 import { motion } from "framer-motion"
 import { Logo } from "./logo"
+import { ThemeToggle } from "./theme-toggle"
 
 const NAV_LINKS = [
   { label: "Markets", href: "#markets" },
@@ -38,12 +39,12 @@ export function Header() {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`relative flex items-center justify-between rounded-full border transition-all duration-300 ${
           scrolled
-            ? "border-white/[0.16] bg-[#0c0d10]/90 px-5 py-2.5 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.8)]"
-            : "border-white/[0.10] bg-[#0c0d10]/70 px-5 py-2.5 backdrop-blur-lg shadow-lg"
+            ? "border-black/[0.14] dark:border-white/[0.16] bg-white/90 dark:bg-[#0c0d10]/90 px-5 py-2.5 backdrop-blur-xl shadow-lg dark:shadow-[0_12px_40px_rgba(0,0,0,0.8)] text-slate-900 dark:text-white"
+            : "border-black/[0.10] dark:border-white/[0.10] bg-white/70 dark:bg-[#0c0d10]/70 px-5 py-2.5 backdrop-blur-lg shadow-md dark:shadow-lg text-slate-900 dark:text-white"
         }`}
       >
         {/* Left: Brand Logo */}
-        <Link href="/" className="flex items-center gap-2 text-white">
+        <Link href="/" className="flex items-center gap-2 text-slate-900 dark:text-white">
           <Logo />
         </Link>
 
@@ -53,7 +54,7 @@ export function Header() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-xs font-medium text-gray-3 transition-colors duration-200 hover:text-white"
+                className="text-xs font-medium text-slate-600 dark:text-gray-3 transition-colors duration-200 hover:text-slate-900 dark:hover:text-white"
               >
                 {link.label}
               </Link>
@@ -61,11 +62,14 @@ export function Header() {
           ))}
         </ul>
 
-        {/* Right: Balance & CTA */}
+        {/* Right: Theme Switcher, Balance & CTA */}
         <div className="flex items-center gap-3">
+          {/* Light / Dark Mode Toggle Button */}
+          <ThemeToggle />
+
           {/* User Balance Indicator */}
-          <div className="hidden items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 font-mono text-xs font-medium text-gray-2 sm:flex">
-            <Wallet className="h-3.5 w-3.5 text-gray-4" />
+          <div className="hidden items-center gap-2 rounded-full border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.03] dark:bg-white/[0.03] px-3 py-1.5 font-mono text-xs font-medium text-slate-800 dark:text-gray-2 sm:flex">
+            <Wallet className="h-3.5 w-3.5 text-slate-500 dark:text-gray-4" />
             <span>$90.42</span>
           </div>
 
@@ -77,26 +81,26 @@ export function Header() {
             type="button"
             aria-label="Toggle menu"
             onClick={() => setOpen((v) => !v)}
-            className="ml-1 flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.12] bg-[#111111] lg:hidden"
+            className="ml-1 flex h-9 w-9 items-center justify-center rounded-full border border-black/[0.12] dark:border-white/[0.12] bg-slate-100 dark:bg-[#111111] lg:hidden"
           >
             {open ? (
-              <X className="h-4 w-4 text-gray-3" />
+              <X className="h-4 w-4 text-slate-700 dark:text-gray-3" />
             ) : (
-              <Menu className="h-4 w-4 text-gray-3" />
+              <Menu className="h-4 w-4 text-slate-700 dark:text-gray-3" />
             )}
           </button>
         </div>
 
         {/* Mobile Navigation Dropdown */}
         {open && (
-          <div className="absolute top-14 left-0 right-0 z-50 rounded-2xl border border-white/[0.12] bg-[#0c0d10] p-4 shadow-2xl backdrop-blur-xl lg:hidden">
+          <div className="absolute top-14 left-0 right-0 z-50 rounded-2xl border border-black/[0.12] dark:border-white/[0.12] bg-white dark:bg-[#0c0d10] p-4 shadow-2xl backdrop-blur-xl lg:hidden">
             <ul className="flex flex-col gap-2">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-3 hover:bg-white/[0.04] hover:text-white"
+                    className="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 dark:text-gray-3 hover:bg-slate-100 dark:hover:bg-white/[0.04] hover:text-slate-900 dark:hover:text-white"
                   >
                     {link.label}
                   </Link>
