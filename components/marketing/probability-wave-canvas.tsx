@@ -2,30 +2,13 @@
 
 import { useEffect, useRef } from "react"
 
-type Star = {
+type DataTag = {
   x: number
   y: number
-  vx: number
-  vy: number
-  radius: number
-  alpha: number
-  baseAlpha: number
-  twinkleSpeed: number
-  twinklePhase: number
-  hasFlare: boolean
-}
-
-type Particle = {
-  x: number
-  y: number
-  vx: number
-  vy: number
-  radius: number
+  text: string
   color: string
   alpha: number
-  baseAlpha: number
-  phase: number
-  sentiment: "yes" | "no" | "neutral"
+  speed: number
 }
 
 export function ProbabilityWaveCanvas() {
@@ -49,210 +32,181 @@ export function ProbabilityWaveCanvas() {
 
     window.addEventListener("resize", handleResize)
 
-    // Interactive Liquid Mouse State
-    const mouse = {
-      x: -1000,
-      y: -1000,
-      lastX: -1000,
-      lastY: -1000,
-      vx: 0,
-      vy: 0,
-      radius: 220,
-    }
+    // Interactive Mouse Tracking
+    const mouse = { x: -1000, y: -1000, radius: 200 }
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect()
-      const newX = e.clientX - rect.left
-      const newY = e.clientY - rect.top
-
-      if (mouse.lastX !== -1000) {
-        mouse.vx = newX - mouse.lastX
-        mouse.vy = newY - mouse.lastY
-      }
-
-      mouse.x = newX
-      mouse.y = newY
-      mouse.lastX = newX
-      mouse.lastY = newY
+      mouse.x = e.clientX - rect.left
+      mouse.y = e.clientY - rect.top
     }
 
     const handleMouseLeave = () => {
       mouse.x = -1000
       mouse.y = -1000
-      mouse.vx = 0
-      mouse.vy = 0
     }
 
     window.addEventListener("mousemove", handleMouseMove)
     window.addEventListener("mouseleave", handleMouseLeave)
 
-    // 1. Initialize 180 Twinkling Starlight Particles
-    const numStars = Math.min(Math.floor((width * height) / 5000), 180)
-    const stars: Star[] = []
+    // Floating Financial Annotation Tags
+    const tagLabels = [
+      { text: "YES 62%", color: "#00D8F6" },
+      { text: "BTC +2.4%", color: "#10B981" },
+      { text: "SETTLEMENT 42ms", color: "#F59E0B" },
+      { text: "NO 38%", color: "#E15252" },
+      { text: "NEW MARKET", color: "#3B82F6" },
+      { text: "EVENT RESOLVED", color: "#A855F7" },
+    ]
 
-    for (let i = 0; i < numStars; i++) {
-      const radius = Math.random() * 2.2 + 0.8
-      const alpha = Math.random() * 0.7 + 0.3
-
-      stars.push({
+    const tags: DataTag[] = []
+    for (let i = 0; i < 8; i++) {
+      const labelObj = tagLabels[i % tagLabels.length]
+      tags.push({
         x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        radius,
-        alpha,
-        baseAlpha: alpha,
-        twinkleSpeed: Math.random() * 0.04 + 0.015,
-        twinklePhase: Math.random() * Math.PI * 2,
-        hasFlare: radius > 1.8,
+        y: Math.random() * (height * 0.6) + height * 0.2,
+        text: labelObj.text,
+        color: labelObj.color,
+        alpha: Math.random() * 0.5 + 0.3,
+        speed: Math.random() * 0.6 + 0.4,
       })
     }
 
-    // 2. Initialize 150 Liquid Market Sentiment Particles
-    const colors = {
-      yes: ["#00D8F6", "#10B981", "#34D399"],
-      no: ["#E15252", "#F43F5E", "#EF4444"],
-      neutral: ["#A1A1AA", "#E4E4E7", "#FFFFFF"],
-    }
-
-    const numParticles = Math.min(Math.floor((width * height) / 8000), 150)
-    const particles: Particle[] = []
-
-    for (let i = 0; i < numParticles; i++) {
-      const rand = Math.random()
-      const sentiment: "yes" | "no" | "neutral" = rand < 0.55 ? "yes" : rand < 0.85 ? "no" : "neutral"
-      const colorArr = colors[sentiment]
-      const color = colorArr[Math.floor(Math.random() * colorArr.length)]
-      const radius = Math.random() * 2.8 + 1.2
-      const alpha = Math.random() * 0.55 + 0.35
-
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.8,
-        vy: (Math.random() - 0.5) * 0.8,
-        radius,
-        color,
-        alpha,
-        baseAlpha: alpha,
-        phase: Math.random() * Math.PI * 2,
-        sentiment,
-      })
-    }
-
+    let offset = 0
     let time = 0
 
-    // Render Loop (60 FPS Liquid Fluid Simulation)
+    // Render 60 FPS Procedural Financial Graph Canvas
     const render = () => {
-      time += 0.015
+      time += 0.012
+      offset += 0.8
       ctx.clearRect(0, 0, width, height)
 
-      // Decay mouse velocity gradually for smooth liquid inertia
-      mouse.vx *= 0.92
-      mouse.vy *= 0.92
+      // 1. Draw Subtle Financial Grid Mesh & Level Markers
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.03)"
+      ctx.lineWidth = 1
 
-      // A. Render Moving Twinkling Stars
-      for (let i = 0; i < stars.length; i++) {
-        const s = stars[i]
-        s.x += s.vx
-        s.y += s.vy
-
-        if (s.x < 0) s.x = width
-        if (s.x > width) s.x = 0
-        if (s.y < 0) s.y = height
-        if (s.y > height) s.y = 0
-
-        s.twinklePhase += s.twinkleSpeed
-        const twinkleAlpha = s.baseAlpha + Math.sin(s.twinklePhase) * 0.4
-        const currentAlpha = Math.max(0.15, Math.min(twinkleAlpha, 0.98))
-
+      // Horizontal Probability Level Lines (20%, 40%, 60%, 80%)
+      const levelLabels = ["80%", "60%", "40%", "20%"]
+      for (let i = 1; i <= 4; i++) {
+        const levelY = (height / 5) * i
         ctx.beginPath()
-        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2)
-        ctx.fillStyle = "#FFFFFF"
-        ctx.globalAlpha = currentAlpha
-        ctx.shadowBlur = s.hasFlare ? 10 : 5
-        ctx.shadowColor = "#FFFFFF"
-        ctx.fill()
+        ctx.moveTo(0, levelY)
+        ctx.lineTo(width, levelY)
+        ctx.stroke()
 
-        if (s.hasFlare && currentAlpha > 0.45) {
-          ctx.beginPath()
-          ctx.strokeStyle = `rgba(255, 255, 255, ${currentAlpha * 0.6})`
-          ctx.lineWidth = 0.7
-          const flareLen = s.radius * 3.5
-          ctx.moveTo(s.x - flareLen, s.y)
-          ctx.lineTo(s.x + flareLen, s.y)
-          ctx.moveTo(s.x, s.y - flareLen)
-          ctx.lineTo(s.x, s.y + flareLen)
-          ctx.stroke()
-        }
+        ctx.fillStyle = "rgba(255, 255, 255, 0.15)"
+        ctx.font = "10px Inter, sans-serif"
+        ctx.fillText(levelLabels[i - 1], 12, levelY - 4)
       }
 
-      // B. Render Natural Liquid Fluid Flow Particles
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i]
-
-        // Organic Liquid Vector Flow (Perlin-like fluid wave equations)
-        const fluidX = Math.sin(p.y * 0.005 + time) * Math.cos(p.x * 0.005 + time * 0.8) * 1.5
-        const fluidY = Math.cos(p.x * 0.005 + time) * Math.sin(p.y * 0.005 + time * 0.8) * 1.5
-
-        p.x += p.vx + fluidX * (p.sentiment === "yes" ? 1.1 : -0.9)
-        p.y += p.vy + fluidY * 0.8
-
-        if (p.x < -20) p.x = width + 20
-        if (p.x > width + 20) p.x = -20
-        if (p.y < -20) p.y = height + 20
-        if (p.y > height + 20) p.y = -20
-
-        // Liquid Mouse Displacement & Water Ripple Wave
-        const dx = p.x - mouse.x
-        const dy = p.y - mouse.y
-        const dist = Math.sqrt(dx * dx + dy * dy)
-
-        if (dist < mouse.radius) {
-          const liquidForce = (mouse.radius - dist) / mouse.radius
-          // Fluid liquid wave displacement push + mouse inertia drag
-          const liquidRipple = Math.sin(dist * 0.04 - time * 6) * 3 * liquidForce
-          p.x += (dx / (dist || 1)) * liquidForce * 5 + mouse.vx * liquidForce * 0.2 + liquidRipple
-          p.y += (dy / (dist || 1)) * liquidForce * 5 + mouse.vy * liquidForce * 0.2 + liquidRipple
-          p.alpha = Math.min(p.baseAlpha + liquidForce * 0.45, 0.98)
-        } else {
-          p.alpha += (p.baseAlpha - p.alpha) * 0.05
-        }
-
+      // Vertical Time Markers
+      const gridSpacing = 120
+      const gridOffset = offset % gridSpacing
+      for (let x = width - gridOffset; x > 0; x -= gridSpacing) {
         ctx.beginPath()
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
-        ctx.fillStyle = p.color
-        ctx.globalAlpha = p.alpha
-        ctx.shadowBlur = p.radius > 2 ? 14 : 7
-        ctx.shadowColor = p.color
+        ctx.moveTo(x, 0)
+        ctx.lineTo(x, height)
+        ctx.stroke()
+      }
+
+      // Mouse Parallax Glow Brightness
+      if (mouse.x > 0) {
+        const glowGradient = ctx.createRadialGradient(mouse.x, mouse.y, 10, mouse.x, mouse.y, mouse.radius)
+        glowGradient.addColorStop(0, "rgba(0, 216, 246, 0.12)")
+        glowGradient.addColorStop(1, "rgba(0, 216, 246, 0.0)")
+        ctx.fillStyle = glowGradient
+        ctx.beginPath()
+        ctx.arc(mouse.x, mouse.y, mouse.radius, 0, Math.PI * 2)
         ctx.fill()
       }
 
+      // 2. Procedural Smooth Financial Curves Functions
+      const step = 4
+
+      // A. White Curve = Market Average Index
+      ctx.beginPath()
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.45)"
+      ctx.lineWidth = 1.8
+      for (let x = 0; x <= width + step; x += step) {
+        const worldX = x + offset
+        const y =
+          height * 0.48 +
+          Math.sin(worldX * 0.003 + time) * 45 +
+          Math.cos(worldX * 0.008 + time * 0.7) * 25
+        if (x === 0) ctx.moveTo(x, y)
+        else ctx.lineTo(x, y)
+      }
+      ctx.stroke()
+
+      // B. Cyan Curve = Bullish / YES Odds (#00D8F6)
+      ctx.beginPath()
+      ctx.strokeStyle = "rgba(0, 216, 246, 0.85)"
+      ctx.lineWidth = 2.4
+      ctx.shadowBlur = 12
+      ctx.shadowColor = "#00D8F6"
+      for (let x = 0; x <= width + step; x += step) {
+        const worldX = x + offset
+        const y =
+          height * 0.4 +
+          Math.sin(worldX * 0.004 + time * 1.2) * 55 +
+          Math.sin(worldX * 0.009 + time) * 35
+        if (x === 0) ctx.moveTo(x, y)
+        else ctx.lineTo(x, y)
+      }
+      ctx.stroke()
       ctx.shadowBlur = 0
 
-      // C. Render Liquid Neural Energy Lines
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const p1 = particles[i]
-          const p2 = particles[j]
-          const dx = p1.x - p2.x
-          const dy = p1.y - p2.y
-          const dist = Math.sqrt(dx * dx + dy * dy)
+      // C. Red Curve = Bearish / NO Odds (#E15252)
+      ctx.beginPath()
+      ctx.strokeStyle = "rgba(225, 82, 82, 0.75)"
+      ctx.lineWidth = 2.0
+      ctx.shadowBlur = 10
+      ctx.shadowColor = "#E15252"
+      for (let x = 0; x <= width + step; x += step) {
+        const worldX = x + offset
+        const y =
+          height * 0.58 +
+          Math.cos(worldX * 0.0035 + time * 0.9) * 50 +
+          Math.sin(worldX * 0.007 + time * 1.1) * 30
+        if (x === 0) ctx.moveTo(x, y)
+        else ctx.lineTo(x, y)
+      }
+      ctx.stroke()
+      ctx.shadowBlur = 0
 
-          if (dist < 90) {
-            ctx.beginPath()
-            ctx.moveTo(p1.x, p1.y)
-            ctx.lineTo(p2.x, p2.y)
-            const lineAlpha = (1 - dist / 90) * 0.2
-            ctx.strokeStyle = p1.sentiment === "yes" ? "#00D8F6" : p1.sentiment === "no" ? "#E15252" : "#A1A1AA"
-            ctx.globalAlpha = lineAlpha
-            ctx.lineWidth = 0.8
-            ctx.stroke()
-          }
+      // 3. Render Drifting Financial Annotation Tags
+      for (let i = 0; i < tags.length; i++) {
+        const tag = tags[i]
+        tag.x -= tag.speed
+
+        if (tag.x < -120) {
+          tag.x = width + 50
+          tag.y = Math.random() * (height * 0.6) + height * 0.2
         }
+
+        ctx.save()
+        ctx.fillStyle = "rgba(10, 10, 14, 0.75)"
+        ctx.strokeStyle = tag.color
+        ctx.lineWidth = 1
+        ctx.globalAlpha = tag.alpha
+
+        const paddingX = 8
+        const paddingY = 4
+        ctx.font = "10px Inter, sans-serif"
+        const textWidth = ctx.measureText(tag.text).width
+
+        // Draw Pill Tag Background
+        ctx.beginPath()
+        ctx.roundRect(tag.x - paddingX, tag.y - 12, textWidth + paddingX * 2, 20, 6)
+        ctx.fill()
+        ctx.stroke()
+
+        // Draw Tag Text
+        ctx.fillStyle = tag.color
+        ctx.fillText(tag.text, tag.x, tag.y + 2)
+        ctx.restore()
       }
 
-      ctx.globalAlpha = 1.0
       animationFrameId = requestAnimationFrame(render)
     }
 
@@ -269,7 +223,7 @@ export function ProbabilityWaveCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none absolute inset-0 h-full w-full z-0 opacity-90 dark:opacity-95 select-none"
+      className="pointer-events-none absolute inset-0 h-full w-full z-0 opacity-85 dark:opacity-95 select-none"
     />
   )
 }
