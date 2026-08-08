@@ -50,7 +50,7 @@ export function ProbabilityWaveCanvas() {
     window.addEventListener("resize", handleResize)
 
     // Mouse Interaction Coordinates
-    const mouse = { x: -1000, y: -1000, radius: 160 }
+    const mouse = { x: -1000, y: -1000, radius: 180 }
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect()
@@ -66,36 +66,36 @@ export function ProbabilityWaveCanvas() {
     window.addEventListener("mousemove", handleMouseMove)
     window.addEventListener("mouseleave", handleMouseLeave)
 
-    // 1. Initialize 120 Moving Twinkling Starlight Particles
-    const numStars = Math.min(Math.floor((width * height) / 7000), 120)
+    // 1. Initialize 180 High-Density Moving Twinkling Hero Stars
+    const numStars = Math.min(Math.floor((width * height) / 5000), 180)
     const stars: Star[] = []
 
     for (let i = 0; i < numStars; i++) {
-      const radius = Math.random() * 1.8 + 0.6
-      const alpha = Math.random() * 0.6 + 0.25
+      const radius = Math.random() * 2.2 + 0.8
+      const alpha = Math.random() * 0.7 + 0.3
 
       stars.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.15,
-        vy: (Math.random() - 0.5) * 0.15,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
         radius,
         alpha,
         baseAlpha: alpha,
-        twinkleSpeed: Math.random() * 0.03 + 0.01,
+        twinkleSpeed: Math.random() * 0.04 + 0.015,
         twinklePhase: Math.random() * Math.PI * 2,
-        hasFlare: radius > 1.6,
+        hasFlare: radius > 1.8,
       })
     }
 
-    // 2. Initialize 140 Market Sentiment Particles
+    // 2. Initialize 150 Market Sentiment Wave Particles
     const colors = {
       yes: ["#00D8F6", "#10B981", "#34D399"],
       no: ["#E15252", "#F43F5E", "#EF4444"],
       neutral: ["#A1A1AA", "#E4E4E7", "#FFFFFF"],
     }
 
-    const numParticles = Math.min(Math.floor((width * height) / 9000), 140)
+    const numParticles = Math.min(Math.floor((width * height) / 8000), 150)
     const particles: Particle[] = []
 
     for (let i = 0; i < numParticles; i++) {
@@ -103,14 +103,14 @@ export function ProbabilityWaveCanvas() {
       const sentiment: "yes" | "no" | "neutral" = rand < 0.55 ? "yes" : rand < 0.85 ? "no" : "neutral"
       const colorArr = colors[sentiment]
       const color = colorArr[Math.floor(Math.random() * colorArr.length)]
-      const radius = Math.random() * 2.5 + 1.2
-      const alpha = Math.random() * 0.5 + 0.35
+      const radius = Math.random() * 2.8 + 1.2
+      const alpha = Math.random() * 0.55 + 0.35
 
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.7,
-        vy: (Math.random() - 0.5) * 0.7,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: (Math.random() - 0.5) * 0.8,
         radius,
         color,
         alpha,
@@ -127,7 +127,7 @@ export function ProbabilityWaveCanvas() {
       time += 0.015
       ctx.clearRect(0, 0, width, height)
 
-      // A. Render Moving Twinkling Stars
+      // A. Render Moving Twinkling Stars in Hero Background
       for (let i = 0; i < stars.length; i++) {
         const s = stars[i]
         s.x += s.vx
@@ -141,23 +141,23 @@ export function ProbabilityWaveCanvas() {
 
         // Twinkle Alpha Modulation
         s.twinklePhase += s.twinkleSpeed
-        const twinkleAlpha = s.baseAlpha + Math.sin(s.twinklePhase) * 0.35
-        const currentAlpha = Math.max(0.1, Math.min(twinkleAlpha, 0.95))
+        const twinkleAlpha = s.baseAlpha + Math.sin(s.twinklePhase) * 0.4
+        const currentAlpha = Math.max(0.15, Math.min(twinkleAlpha, 0.98))
 
         ctx.beginPath()
         ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2)
         ctx.fillStyle = "#FFFFFF"
         ctx.globalAlpha = currentAlpha
-        ctx.shadowBlur = s.hasFlare ? 8 : 4
+        ctx.shadowBlur = s.hasFlare ? 10 : 5
         ctx.shadowColor = "#FFFFFF"
         ctx.fill()
 
-        // Draw Subtle 4-Point Starlight Cross Flare for Larger Stars
-        if (s.hasFlare && currentAlpha > 0.4) {
+        // Draw 4-Point Starlight Cross Flare for Larger Stars
+        if (s.hasFlare && currentAlpha > 0.45) {
           ctx.beginPath()
-          ctx.strokeStyle = `rgba(255, 255, 255, ${currentAlpha * 0.5})`
-          ctx.lineWidth = 0.6
-          const flareLen = s.radius * 3
+          ctx.strokeStyle = `rgba(255, 255, 255, ${currentAlpha * 0.6})`
+          ctx.lineWidth = 0.7
+          const flareLen = s.radius * 3.5
           ctx.moveTo(s.x - flareLen, s.y)
           ctx.lineTo(s.x + flareLen, s.y)
           ctx.moveTo(s.x, s.y - flareLen)
@@ -170,8 +170,8 @@ export function ProbabilityWaveCanvas() {
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i]
 
-        const waveX = Math.sin(time + p.y * 0.006 + p.phase) * 1.2
-        const waveY = Math.cos(time * 0.8 + p.x * 0.006 + p.phase) * 1.2
+        const waveX = Math.sin(time + p.y * 0.006 + p.phase) * 1.3
+        const waveY = Math.cos(time * 0.8 + p.x * 0.006 + p.phase) * 1.3
 
         p.x += p.vx + waveX * (p.sentiment === "yes" ? 1 : -0.8)
         p.y += p.vy + waveY * 0.5
@@ -181,16 +181,16 @@ export function ProbabilityWaveCanvas() {
         if (p.y < -20) p.y = height + 20
         if (p.y > height + 20) p.y = -20
 
-        // Mouse Repulsion & Ripple
+        // Mouse Repulsion & Ripple Effect
         const dx = p.x - mouse.x
         const dy = p.y - mouse.y
         const dist = Math.sqrt(dx * dx + dy * dy)
 
         if (dist < mouse.radius) {
           const force = (mouse.radius - dist) / mouse.radius
-          p.x += (dx / dist) * force * 4
-          p.y += (dy / dist) * force * 4
-          p.alpha = Math.min(p.baseAlpha + force * 0.4, 0.95)
+          p.x += (dx / dist) * force * 4.5
+          p.y += (dy / dist) * force * 4.5
+          p.alpha = Math.min(p.baseAlpha + force * 0.4, 0.98)
         } else {
           p.alpha += (p.baseAlpha - p.alpha) * 0.05
         }
@@ -199,7 +199,7 @@ export function ProbabilityWaveCanvas() {
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
         ctx.fillStyle = p.color
         ctx.globalAlpha = p.alpha
-        ctx.shadowBlur = p.radius > 2 ? 12 : 6
+        ctx.shadowBlur = p.radius > 2 ? 14 : 7
         ctx.shadowColor = p.color
         ctx.fill()
       }
@@ -215,11 +215,11 @@ export function ProbabilityWaveCanvas() {
           const dy = p1.y - p2.y
           const dist = Math.sqrt(dx * dx + dy * dy)
 
-          if (dist < 85) {
+          if (dist < 90) {
             ctx.beginPath()
             ctx.moveTo(p1.x, p1.y)
             ctx.lineTo(p2.x, p2.y)
-            const lineAlpha = (1 - dist / 85) * 0.18
+            const lineAlpha = (1 - dist / 90) * 0.2
             ctx.strokeStyle = p1.sentiment === "yes" ? "#00D8F6" : p1.sentiment === "no" ? "#E15252" : "#A1A1AA"
             ctx.globalAlpha = lineAlpha
             ctx.lineWidth = 0.8
@@ -245,7 +245,7 @@ export function ProbabilityWaveCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none absolute inset-0 h-full w-full z-0 opacity-85 dark:opacity-95 select-none"
+      className="pointer-events-none absolute inset-0 h-full w-full z-0 opacity-90 dark:opacity-95 select-none"
     />
   )
 }
