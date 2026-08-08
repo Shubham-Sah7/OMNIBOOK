@@ -2,6 +2,19 @@
 
 import { useEffect, useRef } from "react"
 
+type Star = {
+  x: number
+  y: number
+  vx: number
+  vy: number
+  radius: number
+  alpha: number
+  baseAlpha: number
+  twinkleSpeed: number
+  twinklePhase: number
+  hasFlare: boolean
+}
+
 type Particle = {
   x: number
   y: number
@@ -37,7 +50,7 @@ export function ProbabilityWaveCanvas() {
     window.addEventListener("resize", handleResize)
 
     // Mouse Interaction Coordinates
-    const mouse = { x: -1000, y: -1000, radius: 150 }
+    const mouse = { x: -1000, y: -1000, radius: 160 }
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect()
@@ -53,15 +66,36 @@ export function ProbabilityWaveCanvas() {
     window.addEventListener("mousemove", handleMouseMove)
     window.addEventListener("mouseleave", handleMouseLeave)
 
-    // Palette
+    // 1. Initialize 120 Moving Twinkling Starlight Particles
+    const numStars = Math.min(Math.floor((width * height) / 7000), 120)
+    const stars: Star[] = []
+
+    for (let i = 0; i < numStars; i++) {
+      const radius = Math.random() * 1.8 + 0.6
+      const alpha = Math.random() * 0.6 + 0.25
+
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.15,
+        radius,
+        alpha,
+        baseAlpha: alpha,
+        twinkleSpeed: Math.random() * 0.03 + 0.01,
+        twinklePhase: Math.random() * Math.PI * 2,
+        hasFlare: radius > 1.6,
+      })
+    }
+
+    // 2. Initialize 140 Market Sentiment Particles
     const colors = {
       yes: ["#00D8F6", "#10B981", "#34D399"],
       no: ["#E15252", "#F43F5E", "#EF4444"],
       neutral: ["#A1A1AA", "#E4E4E7", "#FFFFFF"],
     }
 
-    // Initialize 140 High-Performance Particles
-    const numParticles = Math.min(Math.floor((width * height) / 9000), 150)
+    const numParticles = Math.min(Math.floor((width * height) / 9000), 140)
     const particles: Particle[] = []
 
     for (let i = 0; i < numParticles; i++) {
@@ -75,8 +109,8 @@ export function ProbabilityWaveCanvas() {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.8,
-        vy: (Math.random() - 0.5) * 0.8,
+        vx: (Math.random() - 0.5) * 0.7,
+        vy: (Math.random() - 0.5) * 0.7,
         radius,
         color,
         alpha,
@@ -93,28 +127,61 @@ export function ProbabilityWaveCanvas() {
       time += 0.015
       ctx.clearRect(0, 0, width, height)
 
-      // Dynamic Sentiment Wave Pulse Current (competing YES vs NO waves)
-      const waveShift = Math.sin(time * 0.8) * 40
-      const yesBias = Math.cos(time * 0.5)
+      // A. Render Moving Twinkling Stars
+      for (let i = 0; i < stars.length; i++) {
+        const s = stars[i]
+        s.x += s.vx
+        s.y += s.vy
 
-      // Draw Particles & Fluid Motion
+        // Wrap around boundaries
+        if (s.x < 0) s.x = width
+        if (s.x > width) s.x = 0
+        if (s.y < 0) s.y = height
+        if (s.y > height) s.y = 0
+
+        // Twinkle Alpha Modulation
+        s.twinklePhase += s.twinkleSpeed
+        const twinkleAlpha = s.baseAlpha + Math.sin(s.twinklePhase) * 0.35
+        const currentAlpha = Math.max(0.1, Math.min(twinkleAlpha, 0.95))
+
+        ctx.beginPath()
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2)
+        ctx.fillStyle = "#FFFFFF"
+        ctx.globalAlpha = currentAlpha
+        ctx.shadowBlur = s.hasFlare ? 8 : 4
+        ctx.shadowColor = "#FFFFFF"
+        ctx.fill()
+
+        // Draw Subtle 4-Point Starlight Cross Flare for Larger Stars
+        if (s.hasFlare && currentAlpha > 0.4) {
+          ctx.beginPath()
+          ctx.strokeStyle = `rgba(255, 255, 255, ${currentAlpha * 0.5})`
+          ctx.lineWidth = 0.6
+          const flareLen = s.radius * 3
+          ctx.moveTo(s.x - flareLen, s.y)
+          ctx.lineTo(s.x + flareLen, s.y)
+          ctx.moveTo(s.x, s.y - flareLen)
+          ctx.lineTo(s.x, s.y + flareLen)
+          ctx.stroke()
+        }
+      }
+
+      // B. Render Market Sentiment Wave Particles
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i]
 
-        // Organic Sine Wave Currents
         const waveX = Math.sin(time + p.y * 0.006 + p.phase) * 1.2
         const waveY = Math.cos(time * 0.8 + p.x * 0.006 + p.phase) * 1.2
 
         p.x += p.vx + waveX * (p.sentiment === "yes" ? 1 : -0.8)
         p.y += p.vy + waveY * 0.5
 
-        // Screen Boundary Wrap
         if (p.x < -20) p.x = width + 20
         if (p.x > width + 20) p.x = -20
         if (p.y < -20) p.y = height + 20
         if (p.y > height + 20) p.y = -20
 
-        // Mouse Repulsion & Wave Ripple
+        // Mouse Repulsion & Ripple
         const dx = p.x - mouse.x
         const dy = p.y - mouse.y
         const dist = Math.sqrt(dx * dx + dy * dy)
@@ -128,7 +195,6 @@ export function ProbabilityWaveCanvas() {
           p.alpha += (p.baseAlpha - p.alpha) * 0.05
         }
 
-        // Draw Particle Circle with Soft Glow
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
         ctx.fillStyle = p.color
@@ -140,7 +206,7 @@ export function ProbabilityWaveCanvas() {
 
       ctx.shadowBlur = 0
 
-      // Draw Connecting Energy Lines between nearby particles (Neural Market Network)
+      // C. Draw Neural Network Connecting Energy Lines
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const p1 = particles[i]
@@ -179,7 +245,7 @@ export function ProbabilityWaveCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none absolute inset-0 h-full w-full z-0 opacity-80 dark:opacity-90 select-none"
+      className="pointer-events-none absolute inset-0 h-full w-full z-0 opacity-85 dark:opacity-95 select-none"
     />
   )
 }
