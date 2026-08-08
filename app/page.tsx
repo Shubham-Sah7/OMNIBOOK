@@ -13,32 +13,35 @@ import { TestimonialsStory } from "@/components/marketing/testimonials-story"
 import { CallToAction } from "@/components/marketing/cta"
 import { Footer } from "@/components/marketing/footer"
 import { SmoothScrollProvider } from "@/components/marketing/smooth-scroll"
+import { BgModeProvider } from "@/components/marketing/bg-mode-context"
 
 export default function Page() {
   return (
     <SmoothScrollProvider>
-      <div className="relative min-h-screen bg-[#fbfbfd] dark:bg-[#0a0a0a] bg-grid-full text-slate-900 dark:text-white selection:bg-[#00D8F6] selection:text-black transition-colors duration-300">
-        <TopBanner />
-        <div className="mx-auto max-w-[90rem]">
-          <Header />
+      <BgModeProvider>
+        <div className="relative min-h-screen bg-[#fbfbfd] dark:bg-[#0a0a0a] bg-grid-full text-slate-900 dark:text-white selection:bg-[#00D8F6] selection:text-black transition-colors duration-300">
+          <TopBanner />
+          <div className="mx-auto max-w-[90rem]">
+            <Header />
 
-          <main>
-            <Hero />
-            <Stats />
-            <BuiltForMarkets />
-            <TrendingMarkets />
-            <HowItWorks />
-            <WhyOmnibook />
-            <CategoriesGrid />
-            <Leaderboard />
-            <TransparencySection />
-            <TestimonialsStory />
-            <CallToAction />
-          </main>
+            <main>
+              <Hero />
+              <Stats />
+              <BuiltForMarkets />
+              <TrendingMarkets />
+              <HowItWorks />
+              <WhyOmnibook />
+              <CategoriesGrid />
+              <Leaderboard />
+              <TransparencySection />
+              <TestimonialsStory />
+              <CallToAction />
+            </main>
 
-          <Footer />
+            <Footer />
+          </div>
         </div>
-      </div>
+      </BgModeProvider>
     </SmoothScrollProvider>
   )
 }

@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X, Wallet } from "lucide-react"
+import { Menu, X, Wallet, Sparkles, Grid } from "lucide-react"
 import { motion } from "framer-motion"
 import { Logo } from "./logo"
 import { ThemeToggle } from "./theme-toggle"
+import { useBgMode } from "./bg-mode-context"
 
 const NAV_LINKS = [
   { label: "Markets", href: "#markets" },
@@ -18,6 +19,7 @@ const NAV_LINKS = [
 export function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { bgMode, toggleBgMode } = useBgMode()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,8 +64,28 @@ export function Header() {
           ))}
         </ul>
 
-        {/* Right: Theme Switcher, Balance & CTA */}
-        <div className="flex items-center gap-3">
+        {/* Right: Background Nudge Switcher, Theme Switcher, Balance & CTA */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Background Style Nudge Switcher (Grid / Space Orbit) */}
+          <button
+            type="button"
+            onClick={toggleBgMode}
+            className="flex items-center gap-1.5 rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 px-2.5 py-1 text-[11px] font-mono font-semibold text-slate-800 dark:text-white transition-all hover:bg-black/10 dark:hover:bg-white/10"
+            title="Switch Background Visual (Arena Grid / Cosmos Orbit)"
+          >
+            {bgMode === "cosmos" ? (
+              <>
+                <Sparkles className="h-3.5 w-3.5 text-[#00D8F6] animate-pulse" />
+                <span className="hidden sm:inline">COSMOS</span>
+              </>
+            ) : (
+              <>
+                <Grid className="h-3.5 w-3.5 text-slate-600 dark:text-gray-3" />
+                <span className="hidden sm:inline">GRID</span>
+              </>
+            )}
+          </button>
+
           {/* Light / Dark Mode Toggle Button */}
           <ThemeToggle />
 
