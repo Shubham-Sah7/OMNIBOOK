@@ -49,24 +49,44 @@ export function ProbabilityWaveCanvas() {
 
     window.addEventListener("resize", handleResize)
 
-    // Mouse Interaction Coordinates
-    const mouse = { x: -1000, y: -1000, radius: 180 }
+    // Interactive Liquid Mouse State
+    const mouse = {
+      x: -1000,
+      y: -1000,
+      lastX: -1000,
+      lastY: -1000,
+      vx: 0,
+      vy: 0,
+      radius: 220,
+    }
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect()
-      mouse.x = e.clientX - rect.left
-      mouse.y = e.clientY - rect.top
+      const newX = e.clientX - rect.left
+      const newY = e.clientY - rect.top
+
+      if (mouse.lastX !== -1000) {
+        mouse.vx = newX - mouse.lastX
+        mouse.vy = newY - mouse.lastY
+      }
+
+      mouse.x = newX
+      mouse.y = newY
+      mouse.lastX = newX
+      mouse.lastY = newY
     }
 
     const handleMouseLeave = () => {
       mouse.x = -1000
       mouse.y = -1000
+      mouse.vx = 0
+      mouse.vy = 0
     }
 
     window.addEventListener("mousemove", handleMouseMove)
     window.addEventListener("mouseleave", handleMouseLeave)
 
-    // 1. Initialize 180 High-Density Moving Twinkling Hero Stars
+    // 1. Initialize 180 Twinkling Starlight Particles
     const numStars = Math.min(Math.floor((width * height) / 5000), 180)
     const stars: Star[] = []
 
@@ -88,7 +108,7 @@ export function ProbabilityWaveCanvas() {
       })
     }
 
-    // 2. Initialize 150 Market Sentiment Wave Particles
+    // 2. Initialize 150 Liquid Market Sentiment Particles
     const colors = {
       yes: ["#00D8F6", "#10B981", "#34D399"],
       no: ["#E15252", "#F43F5E", "#EF4444"],
@@ -122,24 +142,26 @@ export function ProbabilityWaveCanvas() {
 
     let time = 0
 
-    // Render Loop (60 FPS GPU-Accelerated)
+    // Render Loop (60 FPS Liquid Fluid Simulation)
     const render = () => {
       time += 0.015
       ctx.clearRect(0, 0, width, height)
 
-      // A. Render Moving Twinkling Stars in Hero Background
+      // Decay mouse velocity gradually for smooth liquid inertia
+      mouse.vx *= 0.92
+      mouse.vy *= 0.92
+
+      // A. Render Moving Twinkling Stars
       for (let i = 0; i < stars.length; i++) {
         const s = stars[i]
         s.x += s.vx
         s.y += s.vy
 
-        // Wrap around boundaries
         if (s.x < 0) s.x = width
         if (s.x > width) s.x = 0
         if (s.y < 0) s.y = height
         if (s.y > height) s.y = 0
 
-        // Twinkle Alpha Modulation
         s.twinklePhase += s.twinkleSpeed
         const twinkleAlpha = s.baseAlpha + Math.sin(s.twinklePhase) * 0.4
         const currentAlpha = Math.max(0.15, Math.min(twinkleAlpha, 0.98))
@@ -152,7 +174,6 @@ export function ProbabilityWaveCanvas() {
         ctx.shadowColor = "#FFFFFF"
         ctx.fill()
 
-        // Draw 4-Point Starlight Cross Flare for Larger Stars
         if (s.hasFlare && currentAlpha > 0.45) {
           ctx.beginPath()
           ctx.strokeStyle = `rgba(255, 255, 255, ${currentAlpha * 0.6})`
@@ -166,31 +187,34 @@ export function ProbabilityWaveCanvas() {
         }
       }
 
-      // B. Render Market Sentiment Wave Particles
+      // B. Render Natural Liquid Fluid Flow Particles
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i]
 
-        const waveX = Math.sin(time + p.y * 0.006 + p.phase) * 1.3
-        const waveY = Math.cos(time * 0.8 + p.x * 0.006 + p.phase) * 1.3
+        // Organic Liquid Vector Flow (Perlin-like fluid wave equations)
+        const fluidX = Math.sin(p.y * 0.005 + time) * Math.cos(p.x * 0.005 + time * 0.8) * 1.5
+        const fluidY = Math.cos(p.x * 0.005 + time) * Math.sin(p.y * 0.005 + time * 0.8) * 1.5
 
-        p.x += p.vx + waveX * (p.sentiment === "yes" ? 1 : -0.8)
-        p.y += p.vy + waveY * 0.5
+        p.x += p.vx + fluidX * (p.sentiment === "yes" ? 1.1 : -0.9)
+        p.y += p.vy + fluidY * 0.8
 
         if (p.x < -20) p.x = width + 20
         if (p.x > width + 20) p.x = -20
         if (p.y < -20) p.y = height + 20
         if (p.y > height + 20) p.y = -20
 
-        // Mouse Repulsion & Ripple Effect
+        // Liquid Mouse Displacement & Water Ripple Wave
         const dx = p.x - mouse.x
         const dy = p.y - mouse.y
         const dist = Math.sqrt(dx * dx + dy * dy)
 
         if (dist < mouse.radius) {
-          const force = (mouse.radius - dist) / mouse.radius
-          p.x += (dx / dist) * force * 4.5
-          p.y += (dy / dist) * force * 4.5
-          p.alpha = Math.min(p.baseAlpha + force * 0.4, 0.98)
+          const liquidForce = (mouse.radius - dist) / mouse.radius
+          // Fluid liquid wave displacement push + mouse inertia drag
+          const liquidRipple = Math.sin(dist * 0.04 - time * 6) * 3 * liquidForce
+          p.x += (dx / (dist || 1)) * liquidForce * 5 + mouse.vx * liquidForce * 0.2 + liquidRipple
+          p.y += (dy / (dist || 1)) * liquidForce * 5 + mouse.vy * liquidForce * 0.2 + liquidRipple
+          p.alpha = Math.min(p.baseAlpha + liquidForce * 0.45, 0.98)
         } else {
           p.alpha += (p.baseAlpha - p.alpha) * 0.05
         }
@@ -206,7 +230,7 @@ export function ProbabilityWaveCanvas() {
 
       ctx.shadowBlur = 0
 
-      // C. Draw Neural Network Connecting Energy Lines
+      // C. Render Liquid Neural Energy Lines
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const p1 = particles[i]
