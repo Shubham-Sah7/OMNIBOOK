@@ -28,15 +28,15 @@ export function BentoCard({ children, className = "" }: BentoCardProps) {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      whileHover={{ y: -4, transition: { duration: 0.2 } }}
-      className={`relative overflow-hidden rounded-2xl border border-black/[0.08] dark:border-white/[0.08] bg-white dark:bg-[#111111] shadow-sm dark:shadow-none transition-all duration-300 hover:border-black/[0.18] dark:hover:border-white/[0.18] ${className}`}
+      whileHover={{ y: -4, transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } }}
+      className={`relative overflow-hidden rounded-2xl border border-black/[0.10] dark:border-white/[0.10] bg-white/90 dark:bg-[#111115]/90 backdrop-blur-xl shadow-md dark:shadow-[0_10px_30px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-black/20 dark:hover:border-white/20 hover:shadow-xl ${className}`}
     >
-      {/* Handcrafted Mouse Spotlight Effect */}
+      {/* Handcrafted Mouse Radial Spotlight Effect */}
       {isHovered && (
         <div
           className="pointer-events-none absolute -inset-px z-10 transition-opacity duration-300"
           style={{
-            background: `radial-gradient(450px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 0, 0, 0.04), transparent 80%)`,
+            background: `radial-gradient(500px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 216, 246, 0.08), transparent 80%)`,
           }}
         />
       )}
