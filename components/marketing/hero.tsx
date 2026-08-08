@@ -18,8 +18,8 @@ export function Hero() {
   const rightCardY = useTransform(scrollY, [0, 600], [0, -90])
 
   return (
-    <section ref={containerRef} className="relative px-4 pt-16 pb-12 text-center md:px-6 md:pt-24 md:pb-16 overflow-hidden min-h-[90vh] flex flex-col justify-center items-center">
-      {/* Moving Abstract Ambient Background Animation & Live Probability Wave Canvas */}
+    <section ref={containerRef} className="relative w-full min-h-screen px-4 pt-16 pb-16 text-center md:px-6 md:pt-24 md:pb-20 overflow-hidden flex flex-col justify-center items-center">
+      {/* Full-Screen Responsive Background Visual & Live Probability Wave Canvas */}
       <MovingAbstractBackground />
 
       <div className="relative z-10 mx-auto max-w-6xl w-full">
